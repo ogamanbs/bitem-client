@@ -2,7 +2,7 @@ import React,{useState, useRef, useEffect} from 'react';
 // import {useNavigate} from 'react-router-dom';
 
 const signUser = async (user) => {
-    const response = await fetch('http://localhost:8000/user/create', {
+    const response = await fetch('https://bitem-server.vercel.app/user/create', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)

@@ -4,7 +4,7 @@ import Product from './Product';
 
 const getProducts = async () => {
   try {
-    const response = await fetch('http://localhost:8000/products/');
+    const response = await fetch('https://bitem-server.vercel.app/products/all');
     const data = await response.json();
     return data;
   } catch(err) {

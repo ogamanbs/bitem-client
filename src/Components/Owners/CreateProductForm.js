@@ -5,7 +5,7 @@ import PanelDetailForm from './CreateProductForm/PanelDetailForm';
 
 const uploadInfo = async (product) => {
     try {
-        const response = await fetch('http://localhost:8000/products/create', {
+        const response = await fetch('https://bitem-server.vercel.app/products/create', {
             method:"POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(product)

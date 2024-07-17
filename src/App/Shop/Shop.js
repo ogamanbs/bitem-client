@@ -7,7 +7,7 @@ import Products from '../../Components/Products';
 import LogoutUser from '../../Components/LogoutUser';
 
 async function validate(info) {
-    const res = await fetch('http://localhost:8000/user/validate', {
+    const res = await fetch('https://bitem-server.vercel.app/user/validate', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({info})
