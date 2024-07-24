@@ -44,14 +44,18 @@ export default function Shop() {
     }, [cookies, removeCookie, navigate]);
 
     return (
-        <div className="fixed w-full h-[calc(100vh-72.9px)]">
-            <div className="flex items-center justify-between px-10">
+        <div className="w-full h-[calc(100vh-72.9px)]">
+            <div className="h-[10vh] flex items-center justify-between px-2 md:px-10">
                 <Head />
-                <LogoutUser />
+                <div className="">
+                    <LogoutUser />
+                </div>
             </div>
-            <div className="fixed w-full h-full">
+            <div className="h-[90vh] flex w-full h-full">
                 <Menu />
-                <Products />
+                <div className="h-full w-full md:w-[calc(80vw)] overflow-scroll">
+                    <Products />
+                </div>
             </div>
         </div>
     );

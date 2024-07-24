@@ -7,6 +7,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import App from './App/Home/App';
 import Shop from './App/Shop/Shop';
 import Admin from './App/Owners/Admin/Admin';
+import NotFound from './App/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,12 @@ const router = createBrowserRouter([
   {
     path:"/owners/admin",
     element: <Admin />
+  },{
+    path:"/:id",
+    element:<NotFound />
+  },{
+    path:"/robots.txt",
+    element:<NotFound />
   }
 ])
 

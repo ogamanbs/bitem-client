@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Product({product}) {
   return (
-    <div className="card h-64 w-auto text-sm flex flex-col">
+    <div className="card h-64 md:h-64 w-36 md:w-56 text-xs md:text-sm flex flex-col">
         <div className="h-3/4 py-5" style={{'background-color' : `${product.bgcolor}`}}>
             <img className="w-full h-full object-contain" src={product.image} alt={product.name} />
         </div>
