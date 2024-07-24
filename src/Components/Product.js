@@ -13,7 +13,7 @@ export default function Product({product}) {
                     <h2 className="">₹ {product.price}</h2>
                 </div>
                 <div className="w-auto flex items-center">
-                    <div className="rounded-full w-full px-2 py-1 bg-white cursor-pointer">
+                    <div className="rounded-full w-full px-2 py-1 bg-white cursor-pointer text-black">
                         <i className="ri-add-fill"></i>
                     </div>
                 </div>

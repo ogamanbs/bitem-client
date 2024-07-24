@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef} from 'react';
 import { useCookies } from 'react-cookie';
 import {useNavigate} from 'react-router-dom';
 
@@ -16,13 +16,12 @@ async function loginUser(user) {
     }
 }
 
-export default function LoginUser() {
+export default function LoginUser({setMessages, messages}) {
 
     const navigate = useNavigate();
     const [,setCookie] = useCookies(['token']);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [response, setResponse] = useState('');
     const formRef = useRef();
 
     async function handleSubmit(e) {
@@ -34,7 +33,7 @@ export default function LoginUser() {
             };
             const res = await loginUser(user);
             if (res) {
-                setResponse(res.message);
+                setMessages([...messages, res.message]);
                 if (res.message === 'successful login') {
                     setCookie('token', res.info, { path: '/', expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
                     navigate('/shop');
@@ -52,15 +51,6 @@ export default function LoginUser() {
             formRef.current.reset();
         }
     }
-
-    useEffect(() => {
-        if (response) {
-            const timer = setTimeout(() => {
-                setResponse('');
-            }, 2000);
-            return () => clearTimeout(timer);
-        }
-    }, [response]);
 
     return (
         <div className="w-full md:w-1/3 h-screen md:h-full flex flex-col justify-center gap-3 text-sm p-5">
@@ -95,11 +85,6 @@ export default function LoginUser() {
                     />
                 </div>
             </form>
-            {response && (
-                <div className={`text-sm text-center ${response === 'successful login' ? 'text-green-700' : 'text-red-500'}`}>
-                    {response}
-                </div>
-            )}
         </div>
     );
 }

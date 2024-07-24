@@ -1,4 +1,4 @@
-import React,{useState, useRef, useEffect} from 'react';
+import React,{useState, useRef} from 'react';
 // import {useNavigate} from 'react-router-dom';
 
 const signUser = async (user) => {
@@ -20,12 +20,11 @@ const signUser = async (user) => {
     }
 }
 
-export default function CreateUser() {
+export default function CreateUser({setMessages, messages}) {
 
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [response, setResponse] = useState("");
 
     const formRef = useRef();
 
@@ -39,7 +38,7 @@ export default function CreateUser() {
             }
 
             const data = await signUser(user);
-            setResponse(data.message);
+            setMessages([...messages, data.message]);
             setFullname("");
             setEmail("");
             setPassword("");
@@ -49,16 +48,6 @@ export default function CreateUser() {
             formRef.current.reset();
         }
     }
-
-    useEffect(() => {
-        if (response) {
-            const timer = setTimeout(() => {
-                setResponse('');
-            }, 2000);
-            return () => clearTimeout(timer);
-        }
-    }, [response]);
-
     return (
         <div className="w-full md:w-1/3 h-full flex flex-col justify-center gap-3 text-sm p-5">
             <div className=''>
@@ -98,11 +87,6 @@ export default function CreateUser() {
                     />
                 </div>
             </form>
-            {response === 'successfully created user' ? (
-                <div className="text-sm text-green-700 text-center">{response}</div>
-                ):(
-                <div className="text-sm text-red-500 text-center">{response}</div>
-            )}
         </div>
     );
 }
