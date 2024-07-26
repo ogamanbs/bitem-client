@@ -1,7 +1,4 @@
-import React from 'react';
-import SortBySection from '../Components/MenuComps/SortBySection';
-import SecondSection from './MenuComps/SecondSection';
-import ThirdSection from './MenuComps/ThirdSection';
+import React from 'react'; 
 
 export default function Menu() {
   return (
