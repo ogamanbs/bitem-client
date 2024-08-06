@@ -16,7 +16,7 @@ async function loginUser(user) {
     }
 }
 
-export default function LoginUser({setMessages, messages}) {
+export default function LoginUser({setMessages, messages, setLoad}) {
 
     const navigate = useNavigate();
     const [,setCookie] = useCookies(['token']);
@@ -26,6 +26,7 @@ export default function LoginUser({setMessages, messages}) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setLoad(200);
         if(email !== "" && email !== " " && email[0] !== " " && email[email.length-1] !== " " && password !== "" && password !== " " && password[0] !== " " && password[password.length-1] !== " "){
             const user = {
                 email: email,
@@ -33,6 +34,7 @@ export default function LoginUser({setMessages, messages}) {
             };
             const res = await loginUser(user);
             if (res) {
+                setLoad(100);
                 setMessages([...messages, res.message]);
                 if (res.message === 'successful login') {
                     setCookie('token', res.info, { path: '/', expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
@@ -46,9 +48,11 @@ export default function LoginUser({setMessages, messages}) {
                 setEmail('');
                 setPassword('');
                 formRef.current.reset();
+                setLoad(100);
             }
         } else {
             formRef.current.reset();
+            setLoad(100);
         }
     }
 

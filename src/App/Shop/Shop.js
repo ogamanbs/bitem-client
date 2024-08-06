@@ -51,7 +51,7 @@ export default function Shop() {
                     <LogoutUser />
                 </div>
             </div>
-            <div className="h-[90vh] flex w-full h-full">
+            <div className="h-[90vh] flex w-full">
                 <Menu />
                 <div className="h-full w-full md:w-[calc(80vw)] overflow-scroll">
                     <Products />

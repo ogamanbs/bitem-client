@@ -20,7 +20,7 @@ const signUser = async (user) => {
     }
 }
 
-export default function CreateUser({setMessages, messages}) {
+export default function CreateUser({setMessages, messages, setLoad}) {
 
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
@@ -30,24 +30,26 @@ export default function CreateUser({setMessages, messages}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoad(200);
         if(fullname !== "" && fullname !== " " && fullname[0] !== " " && fullname[fullname.length-1] !== " " && email !== "" && email !== " " && email[0] !== " " && email[email.length-1] !== " " && password !== "" && password !== " " && password[0] !== " " && password[password.length-1] !== " "){
             const user = {
                 fullname: fullname,
                 email: email,
                 password: password,
             }
-
             const data = await signUser(user);
+            formRef.current.reset();
+            setLoad(100);
             setMessages([...messages, data.message]);
             setFullname("");
             setEmail("");
             setPassword("");
-            formRef.current.reset();
         } else {
-            console.log('space');
             formRef.current.reset();
+            setLoad(100);
         }
     }
+
     return (
         <div className="w-full md:w-1/3 h-full flex flex-col justify-center gap-3 text-sm p-5">
             <div className=''>
