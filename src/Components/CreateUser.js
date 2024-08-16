@@ -51,7 +51,7 @@ export default function CreateUser({setMessages, messages, setLoad}) {
     }
 
     return (
-        <div className="w-full md:w-1/3 h-full flex flex-col justify-center gap-3 text-sm p-5">
+        <div className="w-full md:w-1/3 h-full flex flex-col justify-center gap-3 text-sm p-10">
             <div className=''>
                 <h1 className="hidden md:block text-2xl font-bold">welcome to <span className="text-blue-400">Bitem</span></h1>
                 <h1 className="text-xl font-medium">Create your account</h1>

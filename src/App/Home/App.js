@@ -37,8 +37,8 @@ export default function App() {
        <div className={`absolute ${vis} w-full min-h-screen bg-zinc-200/20 backdrop-blur-md`}>
             <PreLoader load={load} setLoad={setLoad} />
         </div>
-      <h1 className='text-2xl font-bold text-blue-400 p-5 mb-10 md:mb-0'>Bitem</h1>
-      <div className="w-full h-[80vh] flex flex-col-reverse md:flex-row items-center justify-center gap-5 md:gap-32">
+      <h1 className='text-2xl font-bold text-blue-400 px-5 py-5 md:p-5 mb-5 md:mb-0'>Bitem</h1>
+      <div className="w-full h-auto md:h-[80vh] flex flex-col-reverse md:flex-row items-center justify-center gap-20 md:gap-32">
         <CreateUser setMessages={setMessages} messages={messages} setLoad={setLoad} />
         <LoginUser setMessages={setMessages} messages={messages} setLoad={setLoad} />
       </div>

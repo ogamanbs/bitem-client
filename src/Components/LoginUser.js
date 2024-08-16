@@ -57,7 +57,7 @@ export default function LoginUser({setMessages, messages, setLoad}) {
     }
 
     return (
-        <div className="w-full md:w-1/3 h-screen md:h-full flex flex-col justify-center gap-3 text-sm p-5">
+        <div className="w-full md:w-1/3 h-auto md:h-full flex flex-col justify-center gap-3 text-sm p-10">
             <div className=''>
                 <h1 className="block md:hidden text-2xl font-bold">welcome to <span className="text-blue-400">Bitem</span></h1>
                 <h1 className="text-xl font-medium">Login your account</h1>
