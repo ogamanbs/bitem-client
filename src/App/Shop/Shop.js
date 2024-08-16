@@ -5,6 +5,7 @@ import Head from '../../Components/Head';
 import Menu from '../../Components/Menu';
 import Products from '../../Components/Products';
 import LogoutUser from '../../Components/LogoutUser';
+import MenuSmall from '../../Components/MenuSmall';
 
 async function validate(info) {
     const res = await fetch('https://bitem-server.vercel.app/user/validate', {
@@ -44,16 +45,21 @@ export default function Shop() {
     }, [cookies, removeCookie, navigate]);
 
     return (
-        <div className="w-full h-[calc(100vh-72.9px)]">
-            <div className="h-[10vh] flex items-center justify-between px-2 md:px-10">
+        <div className="w-full min-h-[90vh]">
+            <div className="fixed md:static h-[8vh] md:[10vh] w-full flex items-center justify-between px-2 md:px-10 border-b border-zinc-200 bg-white md:border-0">
                 <Head />
                 <div className="">
                     <LogoutUser />
                 </div>
             </div>
-            <div className="h-[90vh] flex w-full">
-                <Menu />
-                <div className="h-full w-full md:w-[calc(80vw)] overflow-scroll">
+            <div className="h-[90vh] flex flex-col md:flex-row w-full">
+                <div className="hidden md:block">
+                    <Menu />
+                </div>
+                <div className="block  md:hidden">
+                    <MenuSmall />
+                </div>
+                <div className="h-full w-full md:w-[calc(80vw)] overflow-scroll mt-[15vh] md:mt-0">
                     <Products />
                 </div>
             </div>
