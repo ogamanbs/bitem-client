@@ -33,7 +33,7 @@ export default function Products() {
             ))}
           </div>
       </div>
-      <div className="block md:hidden h-full w-full right-0 px-5 md:px-20 py-5">
+      <div className="block md:hidden h-full w-full right-0 px-5 md:px-20">
           <div className="w-full h-auto flex flex-col gap-1">
             {products.length > 0 && products.map((product) => (
                 <ProductSmall key={product.name} product={product} />
