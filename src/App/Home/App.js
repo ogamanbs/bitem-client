@@ -33,7 +33,7 @@ export default function App() {
   }
 
   return (
-    <div className="relative w-full min-h-screen">
+    <div className="relative w-full h-full">
        <div className={`absolute ${vis} w-full min-h-screen bg-zinc-200/20 backdrop-blur-md`}>
             <PreLoader load={load} setLoad={setLoad} />
         </div>
