@@ -9,7 +9,7 @@ export default function ProductSmall({product}) {
                     <img className="w-full h-full object-contain" src={product.image} alt={product.name} />
                 </div>
             </div>
-            <div className='h-full w-full flex flex-col justify-center' style={{ 'background-color' : `${product.panelcolor}`, 'color': `${product.textcolor}`}}>
+            <div className='h-full w-full flex flex-col justify-center' style={{ 'backgroundColor' : `${product.panelcolor}`, 'color': `${product.textcolor}`}}>
                 <div className="flex justify-between gap-3 font-medium">
                     <div className="w-auto px-2">
                         <h1 className="text-lg">{product.name}</h1>

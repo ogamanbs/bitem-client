@@ -1,29 +1,9 @@
 'use client'
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import Product from './Product';
 import ProductSmall from './ProductSmall';
 
-const getProducts = async () => {
-  try {
-    const response = await fetch('https://bitem-server.vercel.app/products/all');
-    const data = await response.json();
-    return data;
-  } catch(err) {
-    console.error(err);
-  }
-}
-
-export default function Products() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const call = async () => {
-      const data = await getProducts();
-      setProducts(data.products);
-    }
-    call();
-  }, [products]);
-
+export default function Products({products, user, setProducts}) {
   return (
     <>
       <div className="hidden md:block h-full w-full right-0 px-10 md:px-20 py-10">

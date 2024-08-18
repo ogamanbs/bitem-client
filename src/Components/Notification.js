@@ -24,7 +24,7 @@ export default function Notification({removeNotif, message}) {
         className="p-2 flex items-start rounded gap-2 text-sm font-medium shadow-lg text-white bg-blue-500 pointer-events-auto">
             <RiCheckboxLine className="mt-0.5" size={15}/>
             <span>{message}</span>
-            <button 
+            <button
             onClick={() => removeNotif(message)}
             className="ml-auto mt-0.5">
                 <RiCloseLine size={15}/>

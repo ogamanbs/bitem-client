@@ -4,11 +4,14 @@ import {
     RiLogoutBoxRLine
 } from '@remixicon/react';
 
-export default function LogoutUser() {
+export default function LogoutUser({setUser, setProducts}) {
 
-    const [, ,removeCookie] = useCookies(['token']);
+    const [cookies, ,removeCookie] = useCookies(['token']);
 
     function handleClick(){
+        console.log(cookies.token);
+        setProducts([]);
+        setUser();
         removeCookie('token',{path:'/'});
     }
 
