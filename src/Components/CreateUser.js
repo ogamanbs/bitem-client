@@ -1,3 +1,4 @@
+import { RiEye2Line, RiEyeCloseLine } from '@remixicon/react';
 import React,{useState, useRef} from 'react';
 // import {useNavigate} from 'react-router-dom';
 
@@ -25,6 +26,7 @@ export default function CreateUser({setMessages, messages, setLoad}) {
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [show, setShow] = useState(false);
 
     const formRef = useRef();
 
@@ -50,6 +52,10 @@ export default function CreateUser({setMessages, messages, setLoad}) {
         }
     }
 
+    const handleClick = () => {
+        setShow(!show);
+    }
+
     return (
         <div className="w-full md:w-1/3 h-full flex flex-col justify-center gap-3 text-sm p-10">
             <div className=''>
@@ -73,14 +79,19 @@ export default function CreateUser({setMessages, messages, setLoad}) {
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full border border-zinc-700 rounded-full py-2 px-5 outline-none bg-transparent"
                 />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    autoComplete="off"
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full border border-zinc-700 rounded-full py-2 px-5 outline-none bg-transparent"
-                />
+                <div className="w-full flex items-center gap-2 border border-zinc-700 rounded-full">
+                    <input
+                        type={show ? 'text' : 'password'}
+                        name="password"
+                        placeholder="password"
+                        autoComplete="off"
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full rounded-full px-5 py-2 outline-none bg-transparent"
+                    />
+                    <div onClick={handleClick} className="py-2 px-3 cursor-pointer">
+                        { show ? <RiEye2Line size={20} /> : <RiEyeCloseLine size={20} /> }
+                    </div>
+                </div>
                 <div className="mt-3">
                     <input
                         type="submit"
