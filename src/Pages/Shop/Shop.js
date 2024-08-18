@@ -4,14 +4,17 @@ import Menu from '../../Components/Menu';
 import Products from '../../Components/Products';
 import LogoutUser from '../../Components/LogoutUser';
 import MenuSmall from '../../Components/MenuSmall';
+import { RiHeartLine, RiShoppingCart2Line } from '@remixicon/react';
 
 export default function Shop({user, products, setProducts, setUser}) {
     return (
         <>
             <div className="w-full min-h-[90vh]">
-                <div className="fixed md:static h-[8vh] md:[10vh] w-full flex items-center justify-between px-2 md:px-10 border-b border-zinc-200 bg-white md:border-0">
+                <div className="fixed md:static h-[8vh] md:[10vh] w-full flex items-center justify-between px-5 md:px-10 border-b border-zinc-200 bg-white md:border-0">
                     <Head />
-                    <div className="">
+                    <div className="flex items-center gap-5">
+                        <button className="cursor-pointer"><RiHeartLine /></button>
+                        <button className="cursor-pointer"><RiShoppingCart2Line /></button>
                         <LogoutUser setUser={setUser} setProducts={setProducts} />
                     </div>
                 </div>
