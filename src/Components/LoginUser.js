@@ -17,7 +17,7 @@ async function loginUser(user) {
     }
 }
 
-export default function LoginUser({setMessages, messages, setLoad, setUser, setMessage}) {
+export default function LoginUser({setMessages, messages, setUser, setLoad}) {
     const navigate = useNavigate();
     const [,setCookie] = useCookies(['token']);
     const [email, setEmail] = useState('');
@@ -39,8 +39,8 @@ export default function LoginUser({setMessages, messages, setLoad, setUser, setM
                 setMessages([...messages, res.message]);
                 if (res.message === 'successful login') {
                     setCookie('token', res.user._id , { path: '/', expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
-                    setUser(user);
-                    setMessage(res.message);
+                    localStorage.setItem('user', JSON.stringify(res.user));
+                    setUser(res.user);
                     navigate('/shop');
                 } else {
                     setEmail('');
@@ -68,7 +68,7 @@ export default function LoginUser({setMessages, messages, setLoad, setUser, setM
         <div className="w-full md:w-1/3 h-auto md:h-full flex flex-col justify-center gap-3 text-sm p-10">
             <div className=''>
                 <h1 className="block md:hidden text-2xl font-bold">welcome to <span className="text-blue-400">Bitem</span></h1>
-                <h1 className="text-xl font-medium">Login your account</h1>
+                <h1 className="text-xl font-medium">Login to your account</h1>
             </div>
             <form ref={formRef} onSubmit={handleSubmit} className="w-full flex flex-col items-center justify-center gap-2">
                 <input

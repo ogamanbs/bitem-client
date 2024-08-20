@@ -1,6 +1,5 @@
 import { RiEye2Line, RiEyeCloseLine } from '@remixicon/react';
 import React,{useState, useRef} from 'react';
-// import {useNavigate} from 'react-router-dom';
 
 const signUser = async (user) => {
     const response = await fetch('https://bitem-server.vercel.app/user/create', {
@@ -23,9 +22,10 @@ const signUser = async (user) => {
 
 export default function CreateUser({setMessages, messages, setLoad}) {
 
-    const [fullname, setFullname] = useState("");
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [image, setImage] = useState("");
     const [show, setShow] = useState(false);
 
     const formRef = useRef();
@@ -33,9 +33,10 @@ export default function CreateUser({setMessages, messages, setLoad}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoad(200);
-        if(fullname !== "" && fullname !== " " && fullname[0] !== " " && fullname[fullname.length-1] !== " " && email !== "" && email !== " " && email[0] !== " " && email[email.length-1] !== " " && password !== "" && password !== " " && password[0] !== " " && password[password.length-1] !== " "){
+        if(image !== "" && name !== "" && name !== " " && name[0] !== " " && name[name.length-1] !== " " && email !== "" && email !== " " && email[0] !== " " && email[email.length-1] !== " " && password !== "" && password !== " " && password[0] !== " " && password[password.length-1] !== " "){
             const user = {
-                fullname: fullname,
+                name: name,
+                image: image,
                 email: email,
                 password: password,
             }
@@ -43,17 +44,28 @@ export default function CreateUser({setMessages, messages, setLoad}) {
             formRef.current.reset();
             setLoad(100);
             setMessages([...messages, data.message]);
-            setFullname("");
+            setName("");
             setEmail("");
             setPassword("");
         } else {
             formRef.current.reset();
+            setMessages([...messages, "empty fields not allowed"]);
             setLoad(100);
         }
     }
 
     const handleClick = () => {
         setShow(!show);
+    }
+
+    const handleImage = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const img = reader.result.toString('base64');
+            setImage(img);
+        }
+        reader.readAsDataURL(file);
     }
 
     return (
@@ -65,11 +77,17 @@ export default function CreateUser({setMessages, messages, setLoad}) {
             <form ref={formRef} onSubmit={handleSubmit} className="w-full flex flex-col items-center justify-center gap-2">
                 <input
                     type="text"
-                    name="fullname"
-                    placeholder="fullname"
+                    name="name"
+                    placeholder="name"
                     autoComplete="off"
-                    onChange={(e) => setFullname(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full border border-zinc-700 rounded-full py-2 px-5 outline-none bg-transparent"
+                />
+                <input
+                    type="file"
+                    name="name"
+                    onChange={handleImage}
+                    className="w-full rounded-full file:rounded-full file:bg-amber-300 file:mr-5 file:border-0 file:py-2 file:px-5 outline-none bg-transparent"
                 />
                 <input
                     type="email"

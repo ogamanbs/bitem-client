@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import CreateUser from '../../Components/CreateUser';
 import LoginUser from '../../Components/LoginUser';
 import {useCookies} from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Notification from '../../Components/Notification';
 import { AnimatePresence } from 'framer-motion';
 import PreLoader from '../../Components/PreLoader';
@@ -13,20 +13,21 @@ export default function Home({setUser, setMessage}) {
 
   const [cookies] = useCookies(['token']);
   const [messages, setMessages] = useState([]);
-  const navigate = useNavigate();
   const [load, setLoad] = useState(100);
   const [vis, setVis] = useState('hidden');
 
   useEffect(() => {
-    if(cookies.token) {
-      navigate('/shop');
-    }
     if(load === 200) {
       setVis('block');
     } else if(load === 100) {
-        setVis('hidden');
+      setVis('hidden');
     }
-  }, [cookies, navigate, load, setVis]);
+  }, [load]);
+
+
+  if(cookies.token) {
+    return <Navigate to="/shop" replace/>
+  }
 
   const removeNotif = (msg) => {
     setMessages((prevMessages) => prevMessages.filter((message) => { return message !== msg; }));
@@ -34,7 +35,7 @@ export default function Home({setUser, setMessage}) {
 
   return (
     <div className="relative w-full h-full">
-       <div className={`absolute ${vis} w-full min-h-screen bg-zinc-200/20 backdrop-blur-md`}>
+        <div className={`absolute ${vis} w-full min-h-screen bg-zinc-200/20 backdrop-blur-md`}>
             <PreLoader load={load} setLoad={setLoad} />
         </div>
       <h1 className='text-2xl font-bold text-blue-400 px-5 py-5 md:p-5 mb-5 md:mb-0'>Bitem</h1>

@@ -6,10 +6,9 @@ import {
 
 export default function LogoutUser({setUser, setProducts}) {
 
-    const [cookies, ,removeCookie] = useCookies(['token']);
+    const [,,removeCookie] = useCookies(['token']);
 
     function handleClick(){
-        console.log(cookies.token);
         setProducts([]);
         setUser();
         removeCookie('token',{path:'/'});
