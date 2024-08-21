@@ -51,10 +51,8 @@ export default function App () {
                 cachedUser = JSON.parse(cachedUser);
                 if(cookies.token && !user){
                     if(cachedUser) {
-                        console.log('cachedUser');
                         setUser(cachedUser);
                     } else {
-                        console.log('updating the user');
                         setUser(data_user.user);
                         localStorage.setItem('user', JSON.stringify(data_user.user));
                     }
