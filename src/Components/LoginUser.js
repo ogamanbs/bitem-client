@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import {useNavigate} from 'react-router-dom';
 
 async function loginUser(user) {
-    const res = await fetch('https://bitem-server.vercel.app/user/login', {
+    const res = await fetch('https://server.bitem.in/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)

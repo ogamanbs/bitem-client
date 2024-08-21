@@ -2,7 +2,7 @@ import { RiEye2Line, RiEyeCloseLine } from '@remixicon/react';
 import React,{useState, useRef} from 'react';
 
 const signUser = async (user) => {
-    const response = await fetch('https://bitem-server.vercel.app/user/create', {
+    const response = await fetch('https://server.bitem.in/user/create', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)

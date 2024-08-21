@@ -8,7 +8,7 @@ import ProtectedRoutes from './Pages/ProtectedRoutes';
 
 const getProducts = async () => {
     try {
-        const response = await fetch('https://bitem-server.vercel.app/products/all');
+        const response = await fetch('https://server.bitem.in/products/all');
         if(response.ok) {
             const data = await response.json();
             return data;
@@ -20,7 +20,7 @@ const getProducts = async () => {
 
 const getUser = async (token) => {
     try {
-        const response = await fetch('https://bitem-server.vercel.app/user/get-user', {
+        const response = await fetch('https://server.bitem.in/user/get-user', {
             method: 'POST',
             headers: { 'Content-Type' : 'application/json' },
             body: JSON.stringify({ info: token })
