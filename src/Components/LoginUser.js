@@ -4,20 +4,42 @@ import { useCookies } from 'react-cookie';
 import {useNavigate} from 'react-router-dom';
 
 async function loginUser(user) {
-    const res = await fetch('https://server.bitem.in/user/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    });
-    if (res.ok) {
-        const data = await res.json();
+    try {
+        const res = await fetch('https://server.bitem.in/user/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        });
+        if (res.ok) {
+            const data = await res.json();
+            return data;
+        } else {
+            const data = await res.json();
+            return data;
+        }
+    } catch(err) {
+        const data = { message: 'login failed' }
         return data;
-    } else {
-        return { message: 'login failed' };
     }
 }
 
-export default function LoginUser({setMessages, messages, setUser, setLoad}) {
+async function fetchProducts() {
+    try {
+        const response = await fetch('https://server.bitem.in/products/all');
+        if(response.ok) {
+            const data = await response.json();
+            return data;
+        } else {
+            const data = await response.json();
+            return data;
+        }
+    } catch(err) {
+        const data = { message: 'failed to fetch prodcuts' };
+        return data;
+    }
+}
+
+export default function LoginUser({setMessages, messages, setProducts, setUser, setLoad}) {
     const navigate = useNavigate();
     const [,setCookie] = useCookies(['token']);
     const [email, setEmail] = useState('');
@@ -34,22 +56,36 @@ export default function LoginUser({setMessages, messages, setUser, setLoad}) {
                 password: password
             };
             const res = await loginUser(user);
+            setEmail('');
+            setPassword('');
+            formRef.current.reset();
             if (res) {
                 setLoad(100);
                 setMessages([...messages, res.message]);
                 if (res.message === 'successful login') {
-                    setCookie('token', res.user._id , { path: '/', expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
-                    localStorage.setItem('user', JSON.stringify(res.user));
-                    setUser(res.user);
-                    navigate('/shop');
+                    const data = await fetchProducts();
+                    if(data.products) {
+                        localStorage.setItem('products', JSON.stringify(data.products));
+                        setProducts(data.products);
+                        setCookie('token', res.user._id , { path: '/', expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
+                        localStorage.setItem('user', JSON.stringify(res.user));
+                        setUser(res.user);
+                        navigate('/shop', {replace: true});
+                    } else {
+                        localStorage.setItem('products', null);
+                    }
                 } else {
                     setEmail('');
                     setPassword('');
+                    localStorage.setItem('user', null);
+                    localStorage.setItem('products', null);
                     formRef.current.reset();
                 }
             } else {
                 setEmail('');
                 setPassword('');
+                localStorage.setItem('user', null);
+                localStorage.setItem('products', null);
                 formRef.current.reset();
                 setLoad(100);
             }

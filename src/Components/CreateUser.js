@@ -21,7 +21,6 @@ const signUser = async (user) => {
 }
 
 export default function CreateUser({setMessages, messages, setLoad}) {
-
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

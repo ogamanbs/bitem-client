@@ -9,6 +9,8 @@ export default function LogoutUser({setUser, setProducts}) {
     const [,,removeCookie] = useCookies(['token']);
 
     function handleClick(){
+        localStorage.setItem('user', null);
+        localStorage.setItem('products', null);
         setProducts([]);
         setUser();
         removeCookie('token',{path:'/'});
