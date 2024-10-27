@@ -3,7 +3,7 @@ import React from 'react';
 import Product from './Product';
 import ProductSmall from './ProductSmall';
 
-export default function Products({products, user, setProducts}) {
+export default function Products({products}) {
   return (
     <>
       <div className="hidden md:block h-full w-full right-0 px-10 md:px-20 py-10">

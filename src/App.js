@@ -9,6 +9,7 @@ import ProtectedRoutes from './Pages/ProtectedRoutes';
 const getProducts = async () => {
     try {
         const response = await fetch('https://server.bitem.in/products/all');
+        // const response = await fetch('http://localhost:8000/products/all');
         if(response.ok) {
             const data = await response.json();
             return data;
@@ -17,7 +18,10 @@ const getProducts = async () => {
             return data;
         }
     } catch(err) {
-        return {message: 'error fetching products', products: null};
+        return {
+            message: 'error fetching products',
+            products: null
+        };
     }
 }
 
@@ -26,10 +30,12 @@ export default function App() {
         const savedUser = localStorage.getItem('user');
         return savedUser !== null ? JSON.parse(savedUser) : null;
     });
+
     const [products, setProducts] = useState(() => {
         const savedProducts = localStorage.getItem('products');
         return savedProducts !== null ? JSON.parse(savedProducts) : null;
     });
+
     const [, setMessage] = useState("");
     const [cookies] = useCookies(['token']);
 
@@ -39,15 +45,22 @@ export default function App() {
             let cachedProducts = localStorage.getItem('products');
             cachedProducts = JSON.parse(cachedProducts);
             if(data_products.products) {
-                if(data_products.products.length !== cachedProducts.length) {
+                if(cachedProducts === null) {
                     localStorage.setItem('products', JSON.stringify(data_products.products));
                     setProducts(data_products.products);
+                } else {
+                    if(data_products.products.length !== cachedProducts.length) {
+                        localStorage.setItem('products', JSON.stringify(data_products.products));
+                        setProducts(data_products.products);
+                    }
                 }
             }
         }
+
         if(cookies.token) {
             callAPI();
         }
+
     }, [cookies]);
 
     return(
@@ -55,12 +68,12 @@ export default function App() {
             <Routes>
                 <Route
                     path="/"
-                    element={ <Home setProducts={setProducts} setUser={setUser} setMessage={setMessage}/> }
+                    element={ <Home setUser={setUser} setMessage={setMessage}/> }
                 />
                 <Route
                     exact
                     path="/shop"
-                    element={ cookies.token ? <Shop user={user} products={products} setProducts={setProducts} setUser={setUser} /> : <Navigate to={"/"} replace /> }
+                    element={ cookies.token && products ? <Shop user={user} products={products} setProducts={setProducts} setUser={setUser} /> : <Navigate to={"/"} replace /> }
                 />
                 <Route
                     exact

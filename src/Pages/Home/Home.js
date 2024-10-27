@@ -10,7 +10,7 @@ import PreLoader from '../../Components/PreLoader';
 import BitemImage from '../../Images/BitemImage';
 
 
-export default function Home({setProducts, setUser, setMessage}) {
+export default function Home({setUser, setMessage}) {
 
   const [cookies] = useCookies(['token']);
   const [messages, setMessages] = useState([]);
@@ -49,7 +49,7 @@ export default function Home({setProducts, setUser, setMessage}) {
         </div>
         <div className="w-full h-auto md:h-[80vh] flex flex-col-reverse md:flex-row items-center justify-center gap-20 md:gap-32">
           <CreateUser setMessages={setMessages} messages={messages} setLoad={setLoad} />
-          <LoginUser setMessages={setMessages} messages={messages} setLoad={setLoad} setUser={setUser} setProducts={setProducts} setMessage={setMessage} />
+          <LoginUser setMessages={setMessages} messages={messages} setLoad={setLoad} setUser={setUser} setMessage={setMessage} />
         </div>
         <div className="flex flex-col gap-1 w-72 fixed top-2 right-2 z-50 pointer-events-none mt-20 md:mt-0">
           <AnimatePresence>

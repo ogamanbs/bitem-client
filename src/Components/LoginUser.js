@@ -23,23 +23,12 @@ async function loginUser(user) {
     }
 }
 
-async function fetchProducts() {
-    try {
-        const response = await fetch('https://server.bitem.in/products/all');
-        if(response.ok) {
-            const data = await response.json();
-            return data;
-        } else {
-            const data = await response.json();
-            return data;
-        }
-    } catch(err) {
-        const data = { message: 'failed to fetch prodcuts' };
-        return data;
-    }
-}
-
-export default function LoginUser({setMessages, messages, setProducts, setUser, setLoad}) {
+export default function LoginUser({
+    setMessages,
+    messages,
+    setUser,
+    setLoad
+}) {
     const navigate = useNavigate();
     const [,setCookie] = useCookies(['token']);
     const [email, setEmail] = useState('');
@@ -63,31 +52,23 @@ export default function LoginUser({setMessages, messages, setProducts, setUser, 
                 setLoad(100);
                 setMessages([...messages, res.message]);
                 if (res.message === 'successful login') {
-                    const data = await fetchProducts();
-                    if(data.products) {
-                        localStorage.setItem('products', JSON.stringify(data.products));
-                        setProducts(data.products);
                         setCookie('token', res.user._id , { path: '/', expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
                         localStorage.setItem('user', JSON.stringify(res.user));
                         setUser(res.user);
                         navigate('/shop', {replace: true});
-                    } else {
-                        localStorage.setItem('products', null);
-                    }
                 } else {
                     setEmail('');
                     setPassword('');
                     localStorage.setItem('user', null);
-                    localStorage.setItem('products', null);
                     formRef.current.reset();
                 }
             } else {
                 setEmail('');
                 setPassword('');
                 localStorage.setItem('user', null);
-                localStorage.setItem('products', null);
                 formRef.current.reset();
                 setLoad(100);
+                setMessages([...messages, "error finding user"]);
             }
         } else {
             formRef.current.reset();

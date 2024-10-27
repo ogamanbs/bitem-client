@@ -5,11 +5,13 @@ import {useCookies} from 'react-cookie';
 export default function ProtectedRoutes({element}) {
     const { id } = useParams();
     const cached_user = localStorage.getItem('user');
-    const user = JSON.parse(cached_user);
+    const user = cached_user !== null ? JSON.parse(cached_user) : null;
     const [cookies] = useCookies(['token']);
+
     if(!cookies.token || !user) {
         return <Navigate to={"/"} />;
     }
+
     const name = user.name?.toLowerCase().replace(" ", "-");
     return  name === id ? element : <Navigate to={'/shop'} />
 }
