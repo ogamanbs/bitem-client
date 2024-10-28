@@ -1,8 +1,16 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useCookies} from 'react-cookie';
 
 export default function ProductSmall({product}) {
+    const navigate = useNavigate();
+    const [, setCookie] = useCookies(['prodtoken']);
+    const handleClick = () => {
+        setCookie('prodtoken', product._id, {path:'/shop'})
+        navigate(`/shop/${product?.name.toLowerCase().replace(" ", "_")}`);
+    }
     return (
-        <div className="card h-48 w-full text-sm flex items-center border-b border-zinc-200">
+        <div onClick={handleClick} className="card h-48 w-full text-sm flex items-center border-b border-zinc-200">
             <div className="h-full w-36 overflow-hidden flex items-center justify-center" style={{"backgroundColor":`${product.bgcolor}`}}>
                 <div className="h-full w-30 overflow-hidden">
                     <img className="w-full h-full object-contain" src={product.image} alt={product.name} />

@@ -6,7 +6,7 @@ export default function MenuSmall({user, search, setSearch}) {
     return (
       <div className="md:hidden fixed flex items-center justify-between gap-3 w-full h-[7vh] mt-[8vh] px-5 border-b border-zinc-200 bg-white">
           <div className="">
-            <a href={`/${user.name?.replace(' ', '-')}`}><ProfileSmallSection user={user} /></a>
+            <a href={`/${user?.name.replace(' ', '_')}`}><ProfileSmallSection user={user} /></a>
           </div>
           <div className="flex">
             <input

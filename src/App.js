@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './Pages/Home/Home';
-import Shop from './Pages/Shop/Shop';
+// import Shop from './Pages/Shop/Shop';
 import { useCookies } from 'react-cookie';
 import Profile from './Pages/Profile/Profile';
 import ProtectedProfile from './Pages/ProtectedProfile';
+import ShopApp from './Pages/Shop/ShopApp';
 
 export default function App() {
     const [user, setUser] = useState(() => {
@@ -24,8 +25,8 @@ export default function App() {
                 />
                 <Route
                     exact
-                    path="/shop"
-                    element={ cookies.token !== undefined ? <Shop user={user} setUser={setUser} /> : <Navigate to={"/"} replace /> }
+                    path="/shop/*"
+                    element={ cookies.token !== undefined ? <ShopApp user={user} setUser={setUser} /> : <Navigate to={"/"} replace /> }
                 />
                 <Route
                     exact

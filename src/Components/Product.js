@@ -1,10 +1,18 @@
-import { RiAddFill } from '@remixicon/react'
-import React from 'react'
-import HeartButtonProducts from './HeartButtonProducts'
+import { RiAddFill } from '@remixicon/react';
+import React from 'react';
+import HeartButtonProducts from './HeartButtonProducts';
+import {useNavigate} from 'react-router-dom';
+import {useCookies} from 'react-cookie';
 
 export default function Product({product}) {
+    const navigate = useNavigate();
+    const [, setCookie] = useCookies(['prodtoken']);
+    const handleClick = () => {
+        setCookie('prodtoken', product._id, {path:'/shop'})
+        navigate(`/shop/${product?.name.toLowerCase().replace(" ", "_")}`);
+    }
     return (
-        <div className="relative card h-64 md:h-80 w-36 md:w-64 text-xs md:text-sm flex flex-col hover:shadow-md cursor-pointer">
+        <div onClick={handleClick} className="relative card h-64 md:h-80 w-36 md:w-64 text-xs md:text-sm flex flex-col hover:shadow-md cursor-pointer">
             <div className="absolute -right-4 -top-4">
                 <HeartButtonProducts />
             </div>
