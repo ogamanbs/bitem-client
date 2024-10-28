@@ -2,7 +2,7 @@ import React from 'react';
 import {Navigate, useParams} from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 
-export default function ProtectedRoutes({element}) {
+export default function ProtectedProfile({element}) {
     const { id } = useParams();
     const cached_user = localStorage.getItem('user');
     const user = cached_user !== null ? JSON.parse(cached_user) : null;

@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import {Routes, Route, Navigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './Pages/Home/Home';
 import Shop from './Pages/Shop/Shop';
 import { useCookies } from 'react-cookie';
 import Profile from './Pages/Profile/Profile';
-import ProtectedRoutes from './Pages/ProtectedRoutes';
-
-const getProducts = async () => {
-    try {
-        const response = await fetch('https://server.bitem.in/products/all');
-        // const response = await fetch('http://localhost:8000/products/all');
-        if(response.ok) {
-            const data = await response.json();
-            return data;
-        } else {
-            const data = await response.json();
-            return data;
-        }
-    } catch(err) {
-        return {
-            message: 'error fetching products',
-            products: null
-        };
-    }
-}
+import ProtectedProfile from './Pages/ProtectedProfile';
 
 export default function App() {
     const [user, setUser] = useState(() => {
@@ -31,37 +12,8 @@ export default function App() {
         return savedUser !== null ? JSON.parse(savedUser) : null;
     });
 
-    const [products, setProducts] = useState(() => {
-        const savedProducts = localStorage.getItem('products');
-        return savedProducts !== null ? JSON.parse(savedProducts) : null;
-    });
-
     const [, setMessage] = useState("");
     const [cookies] = useCookies(['token']);
-
-    useEffect(()=>{
-        const callAPI = async () => {
-            const data_products = await getProducts();
-            let cachedProducts = localStorage.getItem('products');
-            cachedProducts = JSON.parse(cachedProducts);
-            if(data_products.products) {
-                if(cachedProducts === null) {
-                    localStorage.setItem('products', JSON.stringify(data_products.products));
-                    setProducts(data_products.products);
-                } else {
-                    if(data_products.products.length !== cachedProducts.length) {
-                        localStorage.setItem('products', JSON.stringify(data_products.products));
-                        setProducts(data_products.products);
-                    }
-                }
-            }
-        }
-
-        if(cookies.token) {
-            callAPI();
-        }
-
-    }, [cookies]);
 
     return(
         <div className="">
@@ -73,12 +25,12 @@ export default function App() {
                 <Route
                     exact
                     path="/shop"
-                    element={ cookies.token && products ? <Shop user={user} products={products} setProducts={setProducts} setUser={setUser} /> : <Navigate to={"/"} replace /> }
+                    element={ cookies.token !== undefined ? <Shop user={user} setUser={setUser} /> : <Navigate to={"/"} replace /> }
                 />
                 <Route
                     exact
                     path="/:id"
-                    element={ cookies.token ? <ProtectedRoutes element = {<Profile user={user} setUser={setUser} setProducts={setProducts} />} /> : <Navigate to="/" replace /> }
+                    element={ cookies.token !== undefined ? <ProtectedProfile element = {<Profile user={user} setUser={setUser} />} /> : <Navigate to="/" replace /> }
                 />
             </Routes>
         </div>

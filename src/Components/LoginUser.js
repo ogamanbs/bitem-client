@@ -1,7 +1,6 @@
 import { RiEye2Line, RiEyeCloseLine } from '@remixicon/react';
 import React, { useState, useRef} from 'react';
 import { useCookies } from 'react-cookie';
-import {useNavigate} from 'react-router-dom';
 
 async function loginUser(user) {
     try {
@@ -29,7 +28,6 @@ export default function LoginUser({
     setUser,
     setLoad
 }) {
-    const navigate = useNavigate();
     const [,setCookie] = useCookies(['token']);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -55,7 +53,6 @@ export default function LoginUser({
                         setCookie('token', res.user._id , { path: '/', expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) });
                         localStorage.setItem('user', JSON.stringify(res.user));
                         setUser(res.user);
-                        navigate('/shop', {replace: true});
                 } else {
                     setEmail('');
                     setPassword('');
