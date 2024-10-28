@@ -5,7 +5,7 @@ import ProductSmall from './ProductSmall';
 
 export default function Products({products, search}) {
   const filteredProducts = products?.filter((product) => {
-    return search.toLowerCase() === '' ? product : product.name.toLowerCase().includes(search);
+    return search.toLowerCase() === '' ? product : product.name.toLowerCase().includes(search.toLowerCase());
   });
   return (
     <>
