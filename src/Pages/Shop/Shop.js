@@ -29,6 +29,7 @@ const getProducts = async () => {
 export default function Shop({user, setUser}) {
     const [products, setProducts] = useState(null);
     const [cookies] = useCookies(['token']);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         const callAPI = async () => {
@@ -56,7 +57,7 @@ export default function Shop({user, setUser}) {
                         <Menu user={user} />
                     </div>
                     <div className="block  md:hidden">
-                        <MenuSmall user={user} />
+                        <MenuSmall user={user} search={search} setSearch={setSearch} />
                     </div>
                     <div className="h-full w-full md:w-[calc(80vw)] mt-[15vh] md:mt-0">
                         <div className="hidden h-[7vh] w-full md:flex items-center z-[10] mb-5 bg-white">
@@ -66,13 +67,15 @@ export default function Shop({user, setUser}) {
                                         name="search"
                                         placeholder={"search"}
                                         autoComplete={"off"}
+                                        value={search}
+                                        onChange={(e) => setSearch(e.target.value)}
                                         className="w-[40%] px-5 py-1 text-sm h-10 rounded-full bg-zinc-100 outline-none placeholder:text-zinc-700"
                                 />
                                 <div className="text-blue-400 p-2 rounded-full cursor-pointer"><RiSearchLine /></div>
                             </div>
                         </div>
                         <div className="w-full h-[85vh] md:h-[82vh] overflow-scroll">
-                            <Products products={products} />
+                            <Products products={products} search={search} />
                         </div>
                     </div>
                 </div>
