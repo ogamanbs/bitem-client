@@ -13,9 +13,9 @@ export default function HeartButtonSmallProducts() {
         <>
             {wish ?
             (
-                <button onClick={handleUnWish} className=" text-red-500 "><RiHeartFill /></button>
+                <button onClick={handleUnWish} className=" text-red-500 "><RiHeartFill size={25} /></button>
             ) : (
-                <button onClick={handleWish} className="font-light text-zinc-400"><RiHeartLine /></button>
+                <button onClick={handleWish} className="font-light text-zinc-400"><RiHeartLine size={25} /></button>
             )}
         </>
     );

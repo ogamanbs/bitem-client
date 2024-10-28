@@ -11,8 +11,8 @@ export default function Profile({user, setUser}) {
                 <div className="h-[8vh] md:[10vh] w-full flex items-center justify-between px-5 md:px-10 border-b border-zinc-200 bg-white">
                     <a href="/shop"><Head /></a>
                     <div className="flex items-center gap-5">
-                        <button className="cursor-pointer text-red-500"><RiHeartFill size={20}/></button>
-                        <button className="cursor-pointer"><RiShoppingCart2Line size={20}/></button>
+                        <button className="cursor-pointer text-red-500"><RiHeartFill size={25}/></button>
+                        <button className="cursor-pointer"><RiShoppingCart2Line size={25}/></button>
                         <LogoutUser setUser={setUser} />
                     </div>
                 </div>

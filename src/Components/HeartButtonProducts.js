@@ -13,9 +13,9 @@ export default function HeartButtonProducts() {
         <>
             {wish ?
             (
-                <button onClick={handleUnWish} className="p-2 bg-white rounded-full text-red-500 "><RiHeartFill /></button>
+                <button onClick={handleUnWish} className="p-2 bg-white rounded-full text-red-500 "><RiHeartFill size={25}/></button>
             ) : (
-                <button onClick={handleWish} className="p-2 bg-white text-zinc-400 rounded-full"><RiHeartLine /></button>
+                <button onClick={handleWish} className="p-2 bg-white text-zinc-400 rounded-full"><RiHeartLine size={25} /></button>
             )}
         </>
     );

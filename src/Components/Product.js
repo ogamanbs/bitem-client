@@ -4,7 +4,7 @@ import HeartButtonProducts from './HeartButtonProducts'
 
 export default function Product({product}) {
     return (
-        <div className="relative card h-64 md:h-72 w-36 md:w-56 text-xs md:text-sm flex flex-col hover:shadow-md cursor-pointer">
+        <div className="relative card h-64 md:h-80 w-36 md:w-64 text-xs md:text-sm flex flex-col hover:shadow-md cursor-pointer">
             <div className="absolute -right-4 -top-4">
                 <HeartButtonProducts />
             </div>
