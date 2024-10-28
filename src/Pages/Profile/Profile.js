@@ -16,9 +16,9 @@ export default function Profile({user, setUser}) {
                         <LogoutUser setUser={setUser} />
                     </div>
                 </div>
-                <div className="w-full h-10 border-b border-zinc-200 flex items-center px-5 md:px-10">
-                    <a href="/shop"><button className="md:hidden flex items-center justify-center px-1 py-1 bg-blue-400 text-white rounded-full font-bold"><RiArrowLeftLine size={20} /></button></a>
-                    <a href="/shop"><button className="hidden md:flex items-center justify-center px-5 py-1 bg-blue-400 text-white rounded-full font-bold text-sm">Back to shop</button></a>
+                <div className="w-full h-[7vh] border-b border-zinc-200 flex items-center px-5 md:px-10">
+                    <a href="/shop"><button className="md:hidden flex items-center justify-center px-2 py-2 h-10 w-10 bg-blue-400 text-white rounded-full font-bold"><RiArrowLeftLine size={25} /></button></a>
+                    <a href="/shop"><button className="hidden md:flex items-center justify-center px-5 py-2 bg-blue-400 text-white rounded-full font-bold text-sm">Back to shop</button></a>
                 </div>
                 <div className="w-full h-[70vh] flex flex-col items-center justify-center">
                     <div className="w-[auto]">
