@@ -18,10 +18,10 @@ export default function Shop({user, setUser, products, setProducts}) {
     return (
         <div className="h-[90vh] flex flex-col md:flex-row w-full">
             <div className="hidden md:block">
-                <Menu user={user} />
+                <Menu />
             </div>
             <div className="block  md:hidden">
-                <MenuSmall user={user} search={search} setSearch={setSearch} />
+                <MenuSmall search={search} setSearch={setSearch} />
             </div>
             <div className="h-full w-full md:w-[calc(80vw)] mt-[15vh] md:mt-0">
                 <div className="hidden h-[7vh] w-full md:flex items-center z-[10] mb-5 bg-white">
