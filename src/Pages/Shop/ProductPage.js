@@ -50,7 +50,7 @@ export default function ProductPage() {
     },[cookies, navigate, removeCookie]);
 
     if(product === null) {
-        return <h1 className="mt-5 text-center">Loading....</h1>
+        return <h1 className="py-[10vh] md:py-5 text-center">Loading....</h1>
     }
 
     const handleClick = (count) => {
