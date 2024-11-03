@@ -7,7 +7,7 @@ export default function ProductSmall({product}) {
     const [, setCookie] = useCookies(['prodtoken']);
     const handleClick = () => {
         setCookie('prodtoken', product._id, {path:'/shop'})
-        navigate(`/shop/${product?.name.toLowerCase().replace(" ", "_")}`);
+        navigate(`/shop/${product?.name.toLowerCase().replace(/ /g, "_")}`);
     }
     return (
         <div className="card h-48 w-full text-sm flex items-center border-b border-zinc-200">
