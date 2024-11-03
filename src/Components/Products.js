@@ -7,6 +7,7 @@ export default function Products({products, search}) {
   const filteredProducts = products?.filter((product) => {
     return search.toLowerCase() === '' ? product : product.name.toLowerCase().includes(search.toLowerCase());
   });
+
   return (
     <>
       {products === null && <h1 className="mt-5 text-sm text-center">Loading...</h1>}

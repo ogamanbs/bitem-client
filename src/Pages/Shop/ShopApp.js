@@ -46,7 +46,7 @@ export default function ShopApp({user,setUser}) {
                 <Head />
                 <div className="flex items-center gap-5">
                     <div className="">
-                        <a href={`/${user?.name.replace(' ', '_')}`}>
+                        <a href={`/${user?.name.replace(/ /g, '_')}`}>
                             <div className="h-8 w-8 rounded-full overflow-hidden">
                                 <img className="" src={user.image} alt={user.name}/>
                             </div>

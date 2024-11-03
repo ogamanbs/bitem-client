@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './Pages/Home/Home';
-// import Shop from './Pages/Shop/Shop';
 import { useCookies } from 'react-cookie';
 import Profile from './Pages/Profile/Profile';
 import ProtectedProfile from './Pages/ProtectedProfile';

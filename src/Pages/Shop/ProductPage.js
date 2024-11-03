@@ -54,7 +54,6 @@ export default function ProductPage() {
     }
 
     const handleClick = (count) => {
-        console.log(count);
         setImgnum(count);
     }
 
@@ -63,21 +62,21 @@ export default function ProductPage() {
             <div className="-mt-[21vh] md:mt-0 h-auto md:h-[40vh] w-full md:w-[44%] flex md:flex-row-reverse flex-col">
                 <div className="h-[30vh] md:h-full w-full md:w-[80%] px-2 py-5">
                     <div className="h-full w-full border-l border-transparent md:border-zinc-500 p-2 oveflow-hidden">
-                        <img className="h-full w-full object-contain" src={product.image} alt={product.name}/>
+                        <img className="h-full w-full object-contain" src={product.images[imgnum]} alt={product.name}/>
                     </div>
                 </div>
                 <div className="h-auto md:h-[40vh]  w-full md:w-[20%] flex md:flex-col px-2 py-5 gap-2">
                     <div className={`w-full h-[9vh] border ${imgnum === 0 ? "border-blue-500" : "border-zinc-500"} cursor-pointer`} onMouseOver={() => {handleClick(0)}}>
-                        {/* <img className="h-full w-full object-contain" src={""} alt={""}/> */}
+                        <img className="h-full w-full object-contain" src={product.images[0]} alt={product.name}/>
                     </div>
                     <div className={`w-full h-[9vh] border ${imgnum === 1 ? "border-blue-500" : "border-zinc-500"} cursor-pointer`} onMouseOver={() => {handleClick(1)}}>
-                        {/* <img className="h-full w-full object-contain" src={""} alt={""}/> */}
+                        <img className="h-full w-full object-contain" src={product.images[1]} alt={product.name}/>
                     </div>
                     <div className={`w-full h-[9vh] border ${imgnum === 2 ? "border-blue-500" : "border-zinc-500"} cursor-pointer`} onMouseOver={() => {handleClick(2)}}>
-                        {/* <img className="h-full w-full object-contain" src={""} alt={""}/> */}
+                        <img className="h-full w-full object-contain" src={product.images[2]} alt={product.name}/>
                     </div>
                     <div className={`w-full h-[9vh] border ${imgnum === 3 ? "border-blue-500" : "border-zinc-500"} cursor-pointer`} onMouseOver={() => {handleClick(3)}}>
-                        {/* <img className="h-full w-full object-contain" src={""} alt={""}/> */}
+                        <img className="h-full w-full object-contain" src={product.images[3]} alt={product.name}/>
                     </div>
                 </div>
             </div>

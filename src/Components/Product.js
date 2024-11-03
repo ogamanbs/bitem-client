@@ -9,7 +9,7 @@ export default function Product({product}) {
     const [, setCookie] = useCookies(['prodtoken']);
     const handleClick = () => {
         setCookie('prodtoken', product._id, {path:'/shop'})
-        navigate(`/shop/${product?.name.toLowerCase().replace(" ", "_")}`);
+        navigate(`/shop/${product?.name.toLowerCase().replace(/ /g, "_")}`);
     }
     return (
         <div className="relative card h-64 md:h-80 w-36 md:w-64 text-xs md:text-sm flex flex-col hover:shadow-md cursor-pointer border border-zinc-200">
@@ -17,7 +17,7 @@ export default function Product({product}) {
                 <HeartButtonProducts />
             </div>
             <div onClick={handleClick} className="h-3/4 py-3 border-b border-zinc-200">
-                <img className="w-full h-full object-contain" src={product.image} alt={product.name} />
+                <img className="w-full h-full object-contain" src={product.images[0]} alt={product.name} />
             </div>
             <div className='h-1/4 px-3 flex items-center'>
                 <div className="flex justify-between gap-3 font-medium w-full">

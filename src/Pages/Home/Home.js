@@ -12,7 +12,7 @@ import BitemImage from '../../Images/BitemImage';
 
 export default function Home({setUser, setMessage}) {
 
-  const [cookies] = useCookies(['BdS54ADdsf3@DFssr']);
+  const [cookies] = useCookies(['token']);
   const [messages, setMessages] = useState([]);
   const [load, setLoad] = useState(100);
   const [vis, setVis] = useState('hidden');

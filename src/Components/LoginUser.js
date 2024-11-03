@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 async function loginUser(user) {
     try {
         const res = await fetch('https://server.bitem.in/user/login', {
+        // const res = await fetch('http://localhost:8000/user/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
