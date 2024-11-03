@@ -25,7 +25,7 @@ export default function Product({product}) {
                         <h1 className="">{product.name}</h1>
                         <h3 className="text-xs font-light truncate">seller: {product.owner.name}</h3>
                         <div className="flex items-center gap-4 mt-1">
-                            <h2 className="text-lime-700 select-none">₹ {product.price - product.discount}</h2>
+                            <h2 className="text-lime-700 select-none">₹ {product.price - (product.price * product.discount / 100)}</h2>
                             <h2 className="line-through select-none">₹ {product.price}</h2>
                         </div>
                     </div>

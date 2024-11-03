@@ -22,7 +22,7 @@ export default function ProductSmall({product}) {
                         <h1 className="text-2xl">{product.name}</h1>
                         <h3 className="font-light text-base">seller: {product.owner.name}</h3>
                         <div className="flex gap-4 items-end mt-3">
-                            <h2 className="text-lime-700 text-xl">₹ {product.price - product.discount}</h2>
+                            <h2 className="text-lime-700 text-xl">₹ {product.price - (product.price * product.discount / 100)}</h2>
                             <h2 className="line-through font-bold text-zinc-600 decoration-red-500 text-base">₹ {product.price}</h2>
                         </div>
                     </div>
