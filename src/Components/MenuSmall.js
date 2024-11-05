@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function MenuSmall({search, setSearch}) {
     return (
-      <div className="md:hidden fixed flex items-center justify-between gap-3 w-full h-[7vh] mt-[8vh] px-5 border-b border-zinc-200 bg-white">
+      <div className="md:hidden flex items-center justify-between gap-3 w-full h-[7vh] px-5 border-b border-zinc-200 bg-white">
           <div className="text-blue-400 rounded-md"><RiEqualizerLine size={25}/></div>
           <div className="w-full flex">
             <input

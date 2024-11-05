@@ -10,7 +10,7 @@ export default function ProductSmall({product}) {
         navigate(`/shop/${product?.name.toLowerCase().replace(/ /g, "_")}`);
     }
     return (
-        <div className="card h-48 w-full text-sm flex items-center border-b border-zinc-200">
+        <div className="h-48 w-full text-sm flex items-center border-b border-zinc-200">
             <div onClick={handleClick} className="h-full w-36 overflow-hidden flex items-center justify-center border-r border-zinc-200">
                 <div className="h-full w-30 overflow-hidden">
                     <img className="w-full h-full object-contain" src={product.images[0]} alt={product.name} />
