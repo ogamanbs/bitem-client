@@ -1,6 +1,6 @@
 import { RiHeartFill, RiHeartLine } from '@remixicon/react';
-import React, { useState } from 'react';
-import { useCookies } from 'react-cookie';
+import React from 'react';
+import {useCookies} from 'react-cookie';
 
 const add = async (token, id) => {
     try {
@@ -21,12 +21,11 @@ const add = async (token, id) => {
     }
 }
 
-export default function HeartButtonProducts({setMainUser}) {
+export default function AddToWishList({user, setUser}) {
     const [cookies] = useCookies(['prodtoken', 'token']);
 
     const isPresentInWishlist = () => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if(user && user.wishlist !== undefined) {
+        if(user && user.wishlist) {
             for(let i = 0; i<user.wishlist.length; i++) {
                 if(user.wishlist[i].item === cookies.prodtoken) {
                     return true;
@@ -40,21 +39,19 @@ export default function HeartButtonProducts({setMainUser}) {
         e.preventDefault();
         const data = await add(cookies.token, cookies.prodtoken);
         if(data.user) {
-            setMainUser(data.user);
+            setUser(data.user);
             localStorage.setItem('user', JSON.stringify(data.user));
         } else {
             console.log('error adding the product to wishlist');
         }
     }
-
     return (
-        <>
-            {isPresentInWishlist() ?
-            (
-                <button onClick={addProductToWishlist} className="p-2 bg-white text-zinc-400 rounded-full border border-zinc-400"><RiHeartLine size={25} /></button>
-            ) : (
-                <button className="p-2 bg-white rounded-full text-red-500 border border-zinc-200"><RiHeartFill size={25}/></button>
+        <div className="absolute h-10 w-full px-5 py-3">
+            {isPresentInWishlist() ? (
+                <button className="h-10 w-10 float-right rounded-full border border-zinc-200 text-red-500 flex items-center justify-center bg-white cursor-pointer"><RiHeartFill /></button>
+            ):(
+                <button onClick={addProductToWishlist} className="h-10 w-10 float-right rounded-full border border-zinc-400 text-zinc-400 flex items-center justify-center bg-white cursor-pointer"><RiHeartLine /></button>
             )}
-        </>
+        </div>
     );
 }

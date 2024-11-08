@@ -7,13 +7,14 @@ import {useNavigate} from 'react-router-dom';
 
 export default function LogoutUser({setUser}) {
 
-    const [,,removeCookie] = useCookies(['token']);
+    const [,,removeCookie] = useCookies(['token', 'prodtoken']);
     const navigate = useNavigate();
 
     function handleClick(){
         localStorage.setItem('user', null);
         setUser(null);
-        removeCookie('token',{path:'/'});
+        removeCookie('token', {path:'/'});
+        removeCookie('prodtoken', {path:'/'});
         navigate('/');
     }
 

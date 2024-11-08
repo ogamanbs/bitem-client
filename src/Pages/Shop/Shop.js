@@ -23,7 +23,7 @@ export default function Shop({user, setUser, products, setProducts}) {
             <div className="block  md:hidden">
                 <MenuSmall search={search} setSearch={setSearch} />
             </div>
-            <div className="h-full w-full md:w-[calc(80vw)] mt-[15vh] md:mt-0">
+            <div className="h-full w-full md:w-[calc(80vw)]">
                 <div className="hidden h-[7vh] w-full md:flex items-center z-[10] mb-5 bg-white">
                     <div className="w-full flex items-center justify-center">
                         <input

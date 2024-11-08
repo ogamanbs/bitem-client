@@ -6,7 +6,9 @@ import {useNavigate} from 'react-router-dom';
 
 export default function Profile({user, setUser}) {
     const navigate = useNavigate();
-
+    if(!user) {
+        return <div className="h-auto w-full text-center mt-5">Loading...</div>
+    }
     const goBack = () => {
         navigate(-1);
     }
