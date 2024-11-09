@@ -8,7 +8,8 @@ import ShopApp from './Pages/Shop/ShopApp';
 
 const getUser = async (id) => {
     try {
-        const response = await fetch('http://localhost:8000/user/get-user', {
+        // const response = await fetch('http://localhost:8000/user/get-user', {
+        const response = await fetch('https://server.bitem.in/user/get-user', {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({id})

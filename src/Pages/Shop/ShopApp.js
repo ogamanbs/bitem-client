@@ -7,6 +7,7 @@ import LogoutUser from '../../Components/LogoutUser';
 import Head from '../../Components/Head';
 import { RiHeartFill, RiShoppingCart2Line } from '@remixicon/react';
 import {useNavigate} from 'react-router-dom';
+import ProductPageProtection from './ProductPageProtection';
 
 const getProducts = async () => {
     try {
@@ -69,7 +70,7 @@ export default function ShopApp({user,setUser}) {
                 />
                 <Route
                     path={'/:id'}
-                    element={<ProductPage setUser={setUser} user={user} />}
+                    element={<ProductPageProtection element={<ProductPage setUser={setUser} user={user} />} products={products} />}
                 />
             </Routes>
         </div>
