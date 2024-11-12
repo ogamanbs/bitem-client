@@ -48,7 +48,7 @@ export default function ShopApp({user,setUser}) {
     }
 
     return (
-        <div className="w-full min-h-[100vh]">
+        <div className="w-full h-auto md:h-[100vh]">
             <div className="fixed h-[8vh] md:[10vh] w-full flex items-center justify-between px-5 md:px-10 border-b border-zinc-200 bg-white md:border-0 z-10">
                 <Head />
                 <div className="flex items-center gap-5">

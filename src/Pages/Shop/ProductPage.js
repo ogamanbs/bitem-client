@@ -63,7 +63,7 @@ export default function ProductPage({user, setUser}) {
     }
 
     return (
-        <div className="relative h-[80vh] md:h-[92vh] w-full">
+        <div className="relative h-[83vh] md:h-[92vh] w-full">
             <div className="h-[73vh] md:h-full w-full">
                 <div className="h-[63vh] md:h-full w-full flex md:flex-row flex-col overflow-scroll">
                     <div className="md:h-[40vh] w-full md:w-[40%]">

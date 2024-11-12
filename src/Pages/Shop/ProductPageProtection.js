@@ -10,7 +10,6 @@ export default function ProductPageProtection({element, products}) {
             return <PageNotFound />;
         } else {
             const isProductPresent = products.filter((product) => {
-                console.log(product);
                 return id.replace(/_/g, " ") === product.name.toLowerCase();
             });
             if(isProductPresent.length === 0) {
