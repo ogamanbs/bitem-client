@@ -65,7 +65,7 @@ export default function ProductPage({user, setUser}) {
     return (
         <div className="relative h-[83vh] md:h-[92vh] w-full">
             <div className="h-[73vh] md:h-full w-full">
-                <div className="h-[63vh] md:h-full w-full flex md:flex-row flex-col overflow-scroll">
+                <div className="h-full w-full flex md:flex-row flex-col overflow-scroll md:overflow-hidden">
                     <div className="md:h-[40vh] w-full md:w-[40%]">
                         <div className="flex flex-col md:flex-row-reverse">
                             <div className="relative h-[30vh] md:h-[40vh] w-full md:w-[80%] py-2">
@@ -86,7 +86,7 @@ export default function ProductPage({user, setUser}) {
                             <button className="px-7 py-3 rounded-lg bg-yellow-500 text-white font-bold w-full">Buy Now</button>
                         </div>
                     </div>
-                    <div className="h-auto md:min-h-[90vh] w-full md:border-l border-zinc-500 md:w-[60%] mt-5 md:mt-0 md:px-10 px-5">
+                    <div className="md:min-h-[90vh] w-full md:border-l border-zinc-500 md:w-[60%] mt-5 md:mt-0 md:px-10 px-5 md:overflow-scroll">
                         <h6 className="text-xs text-blue-500 cursor-default"><span className="cursor-pointer"><button onClick={goToShop} className="">Shop</button></span> &gt; {product.name}</h6>
                         <h1 className="text-2xl font-medium mt-1">{product.name}</h1>
                         <div className="mt-5">
@@ -96,12 +96,15 @@ export default function ProductPage({user, setUser}) {
                                 <div className="text-[0.5 rem] text-white font-bold bg-green-600 py-1 px-2 rounded-lg">{product.discount}% off</div>
                             </div>
                         </div>
-                        {product.description &&
+                        {
+                        product.description &&
                         <div className="mt-10">
                             <h1 className="font-medium text-xl">Description</h1>
                             <h3 className="text-base mt-5">{product.description}</h3>
-                        </div>}
-                        {product.features.length > 0 &&
+                        </div>
+                        }
+                        {
+                        product.features.length > 0 &&
                             <div className="mt-10">
                                 <h1 className="font-medium text-xl">Features</h1>
                                 <div className="mt-5">
