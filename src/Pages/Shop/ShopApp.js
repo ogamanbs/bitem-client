@@ -6,7 +6,7 @@ import ProductPage from './ProductPage';
 import LogoutUser from '../../Components/LogoutUser';
 import Head from '../../Components/Head';
 import { RiHeartFill, RiShoppingCart2Line, RiStore2Line } from '@remixicon/react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import ProductPageProtection from './ProductPageProtection';
 
 const getProducts = async () => {
