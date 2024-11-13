@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from '../../Components/Head';
 import LogoutUser from '../../Components/LogoutUser';
-import { RiArrowLeftLine, RiHeartFill, RiShoppingCart2Line } from '@remixicon/react';
+import { RiArrowLeftLine, RiHeartFill, RiShoppingCart2Line, RiStore2Line } from '@remixicon/react';
 import {useNavigate} from 'react-router-dom';
 
 export default function Profile({user, setUser}) {
@@ -13,6 +13,11 @@ export default function Profile({user, setUser}) {
         navigate(-1);
     }
 
+    const navigateToShop = () => {
+        navigate('/shop');
+    }
+
+
     return (
         <>
             <div className="w-full min-h-[90vh]">
@@ -20,6 +25,7 @@ export default function Profile({user, setUser}) {
                     <a href="/shop"><Head /></a>
                     <div className="flex items-center gap-5">
                         <button className="cursor-pointer text-red-500"><RiHeartFill size={30}/></button>
+                        <button onClick={navigateToShop} className="cursor-pointer"><RiStore2Line size={25} /></button>
                         <button className="cursor-pointer"><RiShoppingCart2Line size={27}/></button>
                         <LogoutUser setUser={setUser} />
                     </div>

@@ -5,7 +5,7 @@ import MenuSmall from '../../Components/MenuSmall';
 import { RiSearchLine} from '@remixicon/react';
 import {useCookies} from 'react-cookie';
 
-export default function Shop({user, setUser, products, setProducts}) {
+export default function Shop({user, setUser, products, setProducts, setIsShopRoute, isShopRoute}) {
     const [search, setSearch] = useState("");
     const [cookies,,removeCookie] = useCookies(['prodtoken']);
 
@@ -13,7 +13,11 @@ export default function Shop({user, setUser, products, setProducts}) {
         if(cookies.prodtoken) {
             removeCookie('prodtoken',{path:'/shop'});
         }
-    }, [cookies, removeCookie]);
+
+        if(isShopRoute === false) {
+            setIsShopRoute(true);
+        }
+    }, [cookies, removeCookie, isShopRoute, setIsShopRoute]);
 
     return (
         <div className="h-[90vh] flex flex-col md:flex-row w-full">
@@ -39,7 +43,7 @@ export default function Shop({user, setUser, products, setProducts}) {
                     </div>
                 </div>
                 <div className="w-full h-[85vh] md:h-[82vh] overflow-scroll">
-                    <Products products={products} search={search} />
+                    <Products products={products} search={search} setUser={setUser} user={user} />
                 </div>
             </div>
         </div>

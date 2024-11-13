@@ -14,7 +14,7 @@ export default function Product({product, user, setUser}) {
     return (
         <div className="relative card h-64 md:h-80 w-36 md:w-64 text-xs md:text-sm flex flex-col hover:shadow-md cursor-pointer border border-zinc-200">
             <div className="absolute -right-4 -top-4">
-                <HeartButtonProducts setMainUser={setUser} />
+                <HeartButtonProducts setUser={setUser} product={product} user={user} />
             </div>
             <div onClick={handleClick} className="h-3/4 py-3 border-b border-zinc-200">
                 <img className="w-full h-full object-contain" src={product.images[0]} alt={product.name} />

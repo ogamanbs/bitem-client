@@ -5,8 +5,8 @@ import {useCookies} from 'react-cookie';
 import ProductPage from './ProductPage';
 import LogoutUser from '../../Components/LogoutUser';
 import Head from '../../Components/Head';
-import { RiHeartFill, RiShoppingCart2Line } from '@remixicon/react';
-import {useNavigate} from 'react-router-dom';
+import { RiHeartFill, RiShoppingCart2Line, RiStore2Line } from '@remixicon/react';
+import {useNavigate, useParams} from 'react-router-dom';
 import ProductPageProtection from './ProductPageProtection';
 
 const getProducts = async () => {
@@ -28,9 +28,10 @@ const getProducts = async () => {
     }
 }
 
-export default function ShopApp({user,setUser}) {
+export default function ShopApp({user, setUser}) {
     const [products, setProducts] = useState(null);
     const [cookies] = useCookies(['token']);
+    const [isShopRoute, setIsShopRoute] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -47,6 +48,15 @@ export default function ShopApp({user,setUser}) {
         navigate(`/${user?.name.replace(/ /g, '_')}`);
     }
 
+    const navigateToWishlistPage = (e) => {
+        e.preventDefault();
+        navigate(`/${user?.name.replace(/ /g, '_')}/wishlist`);
+    }
+
+    const navigateToShop = () => {
+        navigate('/shop');
+    }
+
     return (
         <div className="w-full h-auto md:h-[100vh]">
             <div className="fixed h-[8vh] md:[10vh] w-full flex items-center justify-between px-5 md:px-10 border-b border-zinc-200 bg-white md:border-0 z-10">
@@ -57,7 +67,8 @@ export default function ShopApp({user,setUser}) {
                             {user && <img className="" src={user.image} alt={user.name}/>}
                         </button>
                     </div>
-                    <button className="cursor-pointer text-red-500"><RiHeartFill size={30} /></button>
+                    <button onClick={navigateToWishlistPage} className="cursor-pointer text-red-500"><RiHeartFill size={30} /></button>
+                    {!isShopRoute && <button onClick={navigateToShop} className="cursor-pointer"><RiStore2Line size={25} /></button>}
                     <button className="cursor-pointer"><RiShoppingCart2Line size={27} /></button>
                     <LogoutUser setUser={setUser} />
                 </div>
@@ -66,11 +77,11 @@ export default function ShopApp({user,setUser}) {
             <Routes>
                 <Route
                     path={'/'}
-                    element={<Shop user={user} setUser={setUser} products={products} setProducts={setProducts} />}
+                    element={<Shop user={user} setUser={setUser} products={products} setProducts={setProducts} isShopRoute={isShopRoute} setIsShopRoute={setIsShopRoute} />}
                 />
                 <Route
                     path={'/:id'}
-                    element={<ProductPageProtection element={<ProductPage setUser={setUser} user={user} />} products={products} />}
+                    element={<ProductPageProtection element={<ProductPage setUser={setUser} user={user} isShopRoute={isShopRoute} setIsShopRoute={setIsShopRoute} />} products={products} />}
                 />
             </Routes>
         </div>

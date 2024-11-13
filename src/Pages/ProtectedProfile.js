@@ -6,7 +6,7 @@ export default function ProtectedProfile({element, user}) {
     const name = user?.name.toLowerCase().replace(" ", "_");
 
     if(name !== id) {
-        return <PageNotFound />
+        return <PageNotFound />;
     } else {
         return element;
     }

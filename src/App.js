@@ -3,8 +3,9 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './Pages/Home/Home';
 import { useCookies } from 'react-cookie';
 import Profile from './Pages/Profile/Profile';
-import ProtectedProfile from './Pages/ProtectedProfile';
 import ShopApp from './Pages/Shop/ShopApp';
+import WishlistPage from './Pages/Profile/WishlistPage';
+import PageNotFound from './Pages/404PageNotFound/PageNotFound';
 
 const getUser = async (id) => {
     try {
@@ -60,8 +61,18 @@ export default function App() {
                 />
                 <Route
                     exact
-                    path="/:id"
-                    element={ cookies.token !== undefined ? <ProtectedProfile user={user} element = {<Profile user={user} setUser={setUser} />} /> : <Navigate to="/" replace /> }
+                    path={`/${JSON.parse(localStorage.getItem('user'))?.name.replace(/ /g, '_')}`}
+                    element={ cookies.token !== undefined ? <Profile user={user} setUser={setUser} /> : <Navigate to="/" replace /> }
+                />
+                <Route
+                    exact
+                    path={`/${JSON.parse(localStorage.getItem('user'))?.name.replace(/ /g, '_')}/wishlist`}
+                    element={ cookies.token !== undefined ? <WishlistPage user={user} setUser={setUser} /> : <Navigate to="/" replace /> }
+                />
+                <Route
+                    exact
+                    path={'/:id'}
+                    element={ cookies.token !== undefined ? <PageNotFound /> : <Navigate to="/" replace /> }
                 />
             </Routes>
         </div>
