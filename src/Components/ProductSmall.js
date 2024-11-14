@@ -1,8 +1,9 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useCookies} from 'react-cookie';
+import AddToWishListSmall from './AddToWishlistSmall';
 
-export default function ProductSmall({product}) {
+export default function ProductSmall({product, user, setUser}) {
     const navigate = useNavigate();
     const [, setCookie] = useCookies(['prodtoken']);
     const handleClick = () => {
@@ -28,8 +29,8 @@ export default function ProductSmall({product}) {
                     </div>
                 </div>
                 <div className="flex mt-1 px-3 gap-3">
-                    <button className="px-3 py-2 text-white bg-red-400 font-bold rounded-full">Add to Wishlist</button>
-                    <button className="px-3 py-2 text-white bg-blue-400 font-bold rounded-full">Add to the Cart</button>
+                    <AddToWishListSmall user={user} setUser={setUser} product={product} />
+                    <button className="w-full px-3 py-2 text-white bg-blue-500 font-bold rounded-full">Add to Cart</button>
                 </div>
             </div>
         </div>
