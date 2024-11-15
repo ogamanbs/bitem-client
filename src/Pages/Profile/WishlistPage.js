@@ -4,6 +4,7 @@ import Head from '../../Components/Head';
 import LogoutUser from '../../Components/LogoutUser';
 import { RiShoppingCart2Line, RiStore2Line } from '@remixicon/react';
 import { useNavigate } from 'react-router-dom';
+import RemoveFromWishlist from '../../Components/WishlistPageComponents/RemoveFromWishlist';
 
 const getWishlist = async (id) => {
     try {
@@ -28,6 +29,9 @@ const getWishlist = async (id) => {
 export default function WishlistPage({user, setUser}) {
     const [cookies] = useCookies(['token']);
     const [wishlist, setWishlist] = useState(null);
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [productBeingUpdated, setProductBeingUpdated] = useState("");
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -38,7 +42,7 @@ export default function WishlistPage({user, setUser}) {
             }
         }
         callAPI();
-    }, [cookies.token]);
+    }, [cookies.token, user]);
 
     const checkRoute = async () => {
         navigate(`/${user?.name.replace(/ /g, '_')}`);
@@ -64,11 +68,42 @@ export default function WishlistPage({user, setUser}) {
                 </div>
             </div>
             <div className="h-[8vh] bg-transparent w-full"></div>
-            {wishlist !== null && wishlist.length === 0 && <h1 className="mt-5 text-center">No products in wishlist</h1>}
-            {!wishlist && <h1 className="mt-5 text-center">Loading...</h1>}
-            {wishlist && wishlist.length > 0 && <div className="h-[92vh] w-full p-10">
-                wishlist is not empty
-            </div>}
+            <div className="h-[92vh] w-full flex justify-center">
+                <div className='h-[92vh] w-full md:w-1/2'>
+                    <h1 className="text-3xl font-bold text-zinc-600 px-5 pt-5">My Wishlist</h1>
+                    {wishlist !== null && wishlist.length === 0 &&  <div className="h-auto w-full flex flex-col gap-5 mt-5 px-5">
+                        <div className=" border border-zinc-200 p-5 rounded-lg">
+                            <h1 className="text-center">Your Wishlist is EMPTY!!!</h1>
+                        </div>
+                        </div>}
+                    {!wishlist && <h1 className="mt-5 text-center">Loading...</h1>}
+                    {wishlist && wishlist.length > 0 &&
+                        <div className="w-full h-[80vh] overflow-scroll flex flex-col gap-5 mt-5 px-5">
+                            {wishlist.map((product) => (
+                                <div key={product.item._id} className="h-auto w-full border border-zinc-200 p-5 rounded-lg">
+                                    <div  className="flex gap-10">
+                                        <div className="h-20 min-w-20 max-w-20 bg-white rounded-lg cursor-pointer overflow-hidden">
+                                            <img className={`w-full h-full object-contain ${isUpdating && productBeingUpdated === product.item._id ? 'grayscale' : 'grayscale-0'} `} src={product.item.images[0]} alt={product.item.name} />
+                                        </div>
+                                        <div className="w-full flex flex-col">
+                                            <h1 className="hover:text-blue-500 text-base cursor-pointer text-black">{product.item.name}</h1>
+                                            <h1 className='text-xs text-zinc-500'>Added to wishlist on {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(product.dateAdded).getDay()] + ' ' + new Date(product.dateAdded).getDate() + '-' + (new Date(product.dateAdded).getMonth() + 1) + '-' + new Date(product.dateAdded).getFullYear()}</h1>
+                                            <div className="flex gap-3 items-start mt-3">
+                                                <h1 className="text-2xl font-bold">₹ {product.item.price * ((100 - product.item.discount) / 100)}</h1>
+                                                <h1 className="line-through text-zinc-600 text-sm mt-1">₹ {product.item.price}</h1>
+                                                <h1 className="text-green-700 text-sm font-bold mt-1">{product.item.discount}% off</h1>
+                                            </div>
+                                        </div>
+                                        <div className="text-zinc-400">
+                                            {productBeingUpdated !== product.item._id && <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     );
 }

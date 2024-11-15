@@ -12,7 +12,7 @@ export default function Product({product, user, setUser}) {
         navigate(`/shop/${product?.name.toLowerCase().replace(/ /g, "_")}`);
     }
     return (
-        <div className="relative card h-64 md:h-80 w-36 md:w-64 text-xs md:text-sm flex flex-col hover:shadow-md cursor-pointer border border-zinc-200">
+        <div className="relative card h-64 md:h-80 w-36 md:w-64 text-xs md:text-sm flex flex-col hover:shadow-md cursor-pointer border border-zinc-200 rounded-lg">
             <div className="absolute -right-4 -top-4">
                 <HeartButtonProducts setUser={setUser} product={product} user={user} />
             </div>
