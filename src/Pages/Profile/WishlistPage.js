@@ -80,10 +80,12 @@ export default function WishlistPage({user, setUser}) {
                     {wishlist && wishlist.length > 0 &&
                         <div className="w-full h-[80vh] overflow-scroll flex flex-col gap-5 mt-5 px-5">
                             {wishlist.map((product) => (
-                                <div key={product.item._id} className="h-auto w-full border border-zinc-200 p-5 rounded-lg">
-                                    <div  className="flex gap-10">
-                                        <div className="h-20 min-w-20 max-w-20 bg-white rounded-lg cursor-pointer overflow-hidden">
-                                            <img className={`w-full h-full object-contain ${isUpdating && productBeingUpdated === product.item._id ? 'grayscale' : 'grayscale-0'} `} src={product.item.images[0]} alt={product.item.name} />
+                                <div key={product.item._id} className="relative h-auto w-full border border-zinc-200 p-5 rounded-lg">
+                                    <div  className="flex flex-col md:flex-row gap-10">
+                                        <div className="h-[30vh] md:h-20 w-full md:w-auto flex justify-center">
+                                            <div className=" w-[30vh] md:min-w-20 md:max-w-20 h-full rounded-lg cursor-pointer overflow-hidden">
+                                                <img className={`w-full h-full object-contain ${isUpdating && productBeingUpdated === product.item._id ? 'grayscale' : 'grayscale-0'} `} src={product.item.images[0]} alt={product.item.name} />
+                                            </div>
                                         </div>
                                         <div className="w-full flex flex-col">
                                             <h1 className="hover:text-blue-500 text-base cursor-pointer text-black">{product.item.name}</h1>
@@ -94,9 +96,12 @@ export default function WishlistPage({user, setUser}) {
                                                 <h1 className="text-green-700 text-sm font-bold mt-1">{product.item.discount}% off</h1>
                                             </div>
                                         </div>
-                                        <div className="text-zinc-400">
+                                        <div className="hidden md:block text-zinc-400">
                                             {productBeingUpdated !== product.item._id && <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />}
                                         </div>
+                                        {productBeingUpdated !== product.item._id &&<div className="absolute right-0 md:hidden text-zinc-400 flex items-center justify-center p-4 -translate-y-5 rounded-lg border border-zinc-200">
+                                             <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />
+                                        </div>}
                                     </div>
                                 </div>
                             ))}

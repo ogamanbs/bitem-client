@@ -29,11 +29,6 @@ export default function Product({product, user, setUser}) {
                             <h2 className="line-through select-none">₹ {product.price}</h2>
                         </div>
                     </div>
-                    <div className="w-auto flex items-center">
-                        <div className="rounded-full w-full p-2 bg-white cursor-pointer text-bold text-black hover:bg-blue-400 hover:text-white border border-zinc-400 hover:border-transparent">
-                            <RiAddFill size={20} />
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

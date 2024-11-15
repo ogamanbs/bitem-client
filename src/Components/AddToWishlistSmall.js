@@ -1,3 +1,4 @@
+import { RiHeartFill, RiHeartLine } from '@remixicon/react';
 import React, {useState} from 'react';
 import {useCookies} from 'react-cookie';
 
@@ -89,17 +90,17 @@ export default function AddToWishListSmall({product, user, setUser}) {
                 <button
                 onClick={removeProductFromWishlist}
                 disabled={isUpdating}
-                className="w-full px-3 py-2 border border-red-500 text-red-500 font-bold rounded-full"
+                className="w-full font-bold rounded-full text-red-400"
                 >
-                    Remove from wishlist
+                    <RiHeartFill size={25} />
                 </button>
             ):(
                 <button
                 onClick={addProductToWishlist}
                 disabled={isUpdating}
-                className="w-full px-3 py-2 bg-red-500 text-white font-bold rounded-full"
+                className="w-full font-bold rounded-full text-zinc-600"
                 >
-                    Add to wishlist
+                    <RiHeartLine size={25} />
                 </button>
             )}
         </>
