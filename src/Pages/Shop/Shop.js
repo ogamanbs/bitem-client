@@ -20,7 +20,7 @@ export default function Shop({user, setUser, products, setProducts, setIsShopRou
     }, [cookies, removeCookie, isShopRoute, setIsShopRoute]);
 
     return (
-        <div className="h-[90vh] flex flex-col md:flex-row w-full">
+        <div className="h-[82vh] md:h-[92vh] flex flex-col md:flex-row w-full">
             <div className="hidden md:block">
                 <Menu />
             </div>
@@ -42,7 +42,7 @@ export default function Shop({user, setUser, products, setProducts, setIsShopRou
                         <div className="text-blue-400 p-2 rounded-full cursor-pointer"><RiSearchLine /></div>
                     </div>
                 </div>
-                <div className="w-full h-[85vh] md:h-[82vh] overflow-scroll">
+                <div className="w-full h-[72vh] md:h-[82vh] overflow-scroll">
                     <Products products={products} search={search} setUser={setUser} user={user} />
                 </div>
             </div>

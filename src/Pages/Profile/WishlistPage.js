@@ -53,7 +53,7 @@ export default function WishlistPage({user, setUser}) {
     }
 
     return (
-        <div className="w-full h-[100vh]">
+        <div className="w-full h-[90vh] md:h-[100vh]">
             <div className="fixed h-[8vh] md:[10vh] w-full flex items-center justify-between px-5 md:px-10 border-b border-zinc-200 bg-white md:border-0 z-10">
                 <Head />
                 <div className="flex items-center gap-5">
@@ -68,8 +68,8 @@ export default function WishlistPage({user, setUser}) {
                 </div>
             </div>
             <div className="h-[8vh] bg-transparent w-full"></div>
-            <div className="h-[92vh] w-full flex justify-center">
-                <div className='h-[92vh] w-full md:w-1/2'>
+            <div className="h-[82vh] w-full flex justify-center">
+                <div className='h-[82vh] w-full md:w-1/2'>
                     <h1 className="text-3xl font-bold text-zinc-600 px-5 pt-5">My Wishlist</h1>
                     {wishlist !== null && wishlist.length === 0 &&  <div className="h-auto w-full flex flex-col gap-5 mt-5 px-5">
                         <div className=" border border-zinc-200 p-5 rounded-lg">
@@ -78,7 +78,7 @@ export default function WishlistPage({user, setUser}) {
                         </div>}
                     {!wishlist && <h1 className="mt-5 text-center">Loading...</h1>}
                     {wishlist && wishlist.length > 0 &&
-                        <div className="w-full h-[80vh] overflow-scroll flex flex-col gap-5 mt-5 px-5">
+                        <div className="w-full h-[73vh] overflow-scroll flex flex-col gap-5 mt-5 px-5 pb-5">
                             {wishlist.map((product) => (
                                 <div key={product.item._id} className="relative h-auto w-full border border-zinc-200 p-5 rounded-lg">
                                     <div  className="flex flex-col md:flex-row gap-10">
@@ -100,7 +100,7 @@ export default function WishlistPage({user, setUser}) {
                                             {productBeingUpdated !== product.item._id && <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />}
                                         </div>
                                         {productBeingUpdated !== product.item._id &&<div className="absolute right-0 md:hidden text-zinc-400 flex items-center justify-center p-4 -translate-y-5 rounded-lg border border-zinc-200">
-                                             <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />
+                                            <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />
                                         </div>}
                                     </div>
                                 </div>

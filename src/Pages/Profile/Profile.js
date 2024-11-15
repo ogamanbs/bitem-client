@@ -20,7 +20,7 @@ export default function Profile({user, setUser}) {
 
     return (
         <>
-            <div className="w-full min-h-[90vh]">
+            <div className="w-full h-[90vh] md:h-[100vh]">
                 <div className="h-[8vh] md:[10vh] w-full flex items-center justify-between px-5 md:px-10 border-b border-zinc-200 bg-white">
                     <a href="/shop"><Head /></a>
                     <div className="flex items-center gap-5">
@@ -30,11 +30,11 @@ export default function Profile({user, setUser}) {
                         <LogoutUser setUser={setUser} />
                     </div>
                 </div>
-                <div className="w-full h-[7vh] border-b border-zinc-200 flex items-center px-5 md:px-10">
+                <div className="w-full h-[8vh] border-b border-zinc-200 flex items-center px-5 md:px-10">
                     <button onClick={goBack} className="md:hidden flex items-center justify-center px-2 py-2 h-10 w-10 bg-blue-400 text-white rounded-full font-bold"><RiArrowLeftLine size={25} /></button>
                     <button onClick={goBack} className="hidden md:flex items-center justify-center px-5 py-2 bg-blue-400 text-white rounded-full font-bold text-sm">Back</button>
                 </div>
-                <div className="w-full h-[70vh] flex flex-col items-center justify-center">
+                <div className="w-full h-[74vh] flex flex-col items-center justify-center">
                     <div className="w-[auto]">
                         <div className="w-64 h-64 rounded-[20px] overflow-hidden">
                             <img className="h-full w-full object-cover" src={user.image} alt={user.name} />

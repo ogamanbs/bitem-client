@@ -21,10 +21,12 @@ export default function Products({products, search, user, setUser}) {
               )))}
             </div>
           </div>
-          <div className="block md:hidden h-full w-full md:px-20">
+          <div className="block md:hidden h-full w-full md:px-20 overflow-scroll">
               <div className="w-full h-auto flex flex-col gap-1">
                 {filteredProducts.length === 0 ? <h1 className="mt-5 w-full text-center">Product not found.</h1> : (filteredProducts.map((product, index) => (
+                  <>
                     <ProductSmall key={index} product={product} user={user} setUser={setUser} />
+                  </>
                 )))}
               </div>
           </div>
