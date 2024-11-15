@@ -1,4 +1,3 @@
-import { RiAddFill } from '@remixicon/react';
 import React from 'react';
 import HeartButtonProducts from './HeartButtonProducts';
 import {useNavigate} from 'react-router-dom';
