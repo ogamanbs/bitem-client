@@ -28,7 +28,7 @@ export default function RemoveFromWishlist({user, setUser, id, isUpdating, setIs
     const removeProductFromWishlist = async (e) => {
         e.preventDefault();
         setIsUpdating(true);
-        setProductBeingUpdated(id);
+        setProductBeingUpdated([...productBeingUpdated , id]);
         const data = await remove(cookies.token, id);
         if(data.user) {
             setUser(data.user);
@@ -37,8 +37,10 @@ export default function RemoveFromWishlist({user, setUser, id, isUpdating, setIs
             console.log('error adding the product to wishlist');
         }
         if(JSON.stringify(data.user) === JSON.stringify(user)) {
-            setIsUpdating(false);
-            setProductBeingUpdated("");
+            setProductBeingUpdated(productBeingUpdated.filter((pid) => {return pid === id ? false : true;}));
+            if(productBeingUpdated.length === 0) {
+                setIsUpdating(false);
+            }
         }
     }
     return (

@@ -30,7 +30,7 @@ export default function WishlistPage({user, setUser}) {
     const [cookies] = useCookies(['token']);
     const [wishlist, setWishlist] = useState(null);
     const [isUpdating, setIsUpdating] = useState(false);
-    const [productBeingUpdated, setProductBeingUpdated] = useState("");
+    const [productBeingUpdated, setProductBeingUpdated] = useState([]);
 
     const navigate = useNavigate();
 
@@ -84,7 +84,7 @@ export default function WishlistPage({user, setUser}) {
                                     <div  className="flex flex-col md:flex-row gap-10">
                                         <div className="h-[30vh] md:h-20 w-full md:w-auto flex justify-center">
                                             <div className=" w-[30vh] md:min-w-20 md:max-w-20 h-full rounded-lg cursor-pointer overflow-hidden">
-                                                <img className={`w-full h-full object-contain ${isUpdating && productBeingUpdated === product.item._id ? 'grayscale' : 'grayscale-0'} `} src={product.item.images[0]} alt={product.item.name} />
+                                                <img className={`w-full h-full object-contain ${isUpdating && productBeingUpdated.includes(product.item._id) ? 'grayscale' : 'grayscale-0'} `} src={product.item.images[0]} alt={product.item.name} />
                                             </div>
                                         </div>
                                         <div className="w-full flex flex-col">
@@ -97,9 +97,9 @@ export default function WishlistPage({user, setUser}) {
                                             </div>
                                         </div>
                                         <div className="hidden md:block text-zinc-400">
-                                            {productBeingUpdated !== product.item._id && <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />}
+                                            {!productBeingUpdated.includes(product.item._id)  && <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />}
                                         </div>
-                                        {productBeingUpdated !== product.item._id &&<div className="absolute right-0 md:hidden text-zinc-400 flex items-center justify-center p-4 -translate-y-5 rounded-lg border border-zinc-200">
+                                        {!productBeingUpdated.includes(product.item._id)  && <div className="absolute right-0 md:hidden text-zinc-400 flex items-center justify-center p-4 -translate-y-5 rounded-lg border border-zinc-200">
                                             <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />
                                         </div>}
                                     </div>
