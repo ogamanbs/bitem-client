@@ -48,7 +48,6 @@ export default function CreateUser({setMessages, messages, setLoad}) {
             setEmail("");
             setPassword("");
         } else {
-            formRef.current.reset();
             setMessages([...messages, "empty fields not allowed"]);
             setLoad(100);
         }
@@ -87,7 +86,7 @@ export default function CreateUser({setMessages, messages, setLoad}) {
                     type="file"
                     name="name"
                     onChange={handleImage}
-                    className="w-full rounded-full file:rounded-full file:bg-amber-300 file:mr-5 file:border-0 file:py-2 file:px-5 outline-none bg-transparent"
+                    className="w-full rounded-full file:rounded-full file:bg-amber-300 file:mr-5 file:border-0 file:py-2 file:px-5 outline-none bg-transparent cursor-ppinter file:cursor-pointer"
                 />
                 <input
                     type="email"

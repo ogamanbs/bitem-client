@@ -1,13 +1,10 @@
 import React from 'react';
 import HeartButtonProducts from './HeartButtonProducts';
 import {useNavigate} from 'react-router-dom';
-import {useCookies} from 'react-cookie';
 
 export default function Product({product, user, setUser}) {
     const navigate = useNavigate();
-    const [, setCookie] = useCookies(['prodtoken']);
     const handleClick = () => {
-        setCookie('prodtoken', product._id, {path:'/shop'})
         navigate(`/shop/${product?.name.toLowerCase().replace(/ /g, "_")}`);
     }
     return (

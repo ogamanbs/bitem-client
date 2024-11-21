@@ -8,6 +8,7 @@ import Head from '../../Components/Head';
 import { RiHeartFill, RiShoppingCart2Line, RiStore2Line } from '@remixicon/react';
 import {useNavigate} from 'react-router-dom';
 import ProductPageProtection from './ProductPageProtection';
+import TruckLoader from '../../Components/TruckLoader';
 
 const getProducts = async () => {
     try {
@@ -32,12 +33,15 @@ export default function ShopApp({user, setUser}) {
     const [products, setProducts] = useState(null);
     const [cookies] = useCookies(['token']);
     const [isShopRoute, setIsShopRoute] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         const callAPI = async () => {
+            setIsUpdating(true);
             const data = await getProducts();
             setProducts(data.products);
+            setIsUpdating(false);
         }
         if(cookies.token) {
             callAPI();
@@ -81,7 +85,15 @@ export default function ShopApp({user, setUser}) {
                 />
                 <Route
                     path={'/:id'}
-                    element={<ProductPageProtection element={<ProductPage setUser={setUser} user={user} isShopRoute={isShopRoute} setIsShopRoute={setIsShopRoute} />} products={products} />}
+                    element={
+                    !isUpdating ? (
+                        <ProductPageProtection element={<ProductPage setUser={setUser} user={user} isShopRoute={isShopRoute} setIsShopRoute={setIsShopRoute} />} products={products} />
+                    ) : (
+                        <div className="h-[40vh] w-full flex items-center justify-center">
+                            <TruckLoader />
+                        </div>
+                    )
+                }
                 />
             </Routes>
         </div>

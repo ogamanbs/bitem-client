@@ -3,6 +3,7 @@ import {useCookies} from 'react-cookie';
 import {useNavigate} from 'react-router-dom';
 import SmallImages from '../../Components/ProductPageComponents/SmallImages';
 import AddToWishList from '../../Components/ProductPageComponents/AddToWishList';
+import TruckLoader from '../../Components/TruckLoader';
 
 const getProduct = async (id) => {
     try{
@@ -55,7 +56,9 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
     },[cookies, navigate, removeCookie, isShopRoute, setIsShopRoute]);
 
     if(product === null) {
-        return <h1 className="py-[10vh] md:py-5 text-center">Loading....</h1>
+        return (<div className="h-[40vh] w-full flex items-center justify-center">
+            <TruckLoader />
+        </div>);
     }
 
     const handleClick = (count) => {
@@ -75,11 +78,11 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
                         <div className="flex flex-col md:flex-row-reverse">
                             <div className="relative h-[30vh] md:h-[40vh] w-full md:w-[80%] py-2">
                                 <AddToWishList setProduct={setProduct} user={user} setUser={setUser}/>
-                                <div className="h-full w-full border-l border-transparent md:border-zinc-500 p-2 oveflow-hidden">
+                                <div className="h-full w-full p-2 oveflow-hidden">
                                     <img className="h-full w-full object-contain" src={product?.images[imgnum]} alt={product?.name}/>
                                 </div>
                             </div>
-                            <div className="h-auto md:h-[40vh]  w-full md:w-[20%] flex md:flex-col px-2 py-1 gap-2">
+                            <div className="h-auto md:h-[40vh] border-r border-transparent md:border-zinc-500 w-full md:w-[20%] flex md:flex-col px-2 py-1 gap-2">
                                 <SmallImages images={product?.images} name={product?.name} imgnum={imgnum} handleClick={handleClick} />
                             </div>
                         </div>

@@ -72,7 +72,6 @@ export default function LoginUser({
                 setMessages([...messages, "error finding user"]);
             }
         } else {
-            formRef.current.reset();
             setLoad(100);
             setMessages([...messages, "empty fields not allowed"]);
         }

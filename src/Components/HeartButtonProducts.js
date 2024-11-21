@@ -1,6 +1,7 @@
 import { RiHeartFill, RiHeartLine } from '@remixicon/react';
 import { useCookies } from 'react-cookie';
 import React, {useState} from 'react';
+import "./HeartButtonProducts.css";
 
 const add = async (token, id) => {
     try {
@@ -87,24 +88,29 @@ export default function HeartButtonProducts({user, setUser, product}) {
     return (
         <>
             {
-            isPresentInWishlist()
-            ?
-            (
-                <button
-                    onClick={removeProductFromWishlist}
-                    disabled={isUpdating}
-                    className="p-2 bg-white rounded-full text-red-500 border border-zinc-200"
-                >
-                    <RiHeartFill size={25} />
-                </button>
-            ) : (
-                <button
-                    onClick={addProductToWishlist}
-                    disabled={isUpdating}
-                    className="p-2 bg-white text-zinc-400 rounded-full border border-zinc-400"
-                >
-                    <RiHeartLine size={25} />
-                </button>
+            !isUpdating ? (
+                isPresentInWishlist()
+                ?
+                (
+                    <button
+                        onClick={removeProductFromWishlist}
+                        disabled={isUpdating}
+                        className="p-2 bg-white rounded-full text-red-500 border border-zinc-200"
+                    >
+                        <RiHeartFill size={25} />
+                    </button>
+                ) : (
+                    <button
+                        onClick={addProductToWishlist}
+                        disabled={isUpdating}
+                        className="p-2 bg-white text-zinc-400 rounded-full border border-zinc-400"
+                    >
+                        <RiHeartLine size={25} />
+                    </button>
+                )) : (
+                <div className="p-2 bg-white rounded-full text-red-500 border border-zinc-200">
+                    <div className="loaderCircle"></div>
+                </div>
             )}
         </>
     );

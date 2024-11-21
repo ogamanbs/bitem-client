@@ -5,6 +5,7 @@ import LogoutUser from '../../Components/LogoutUser';
 import { RiShoppingCart2Line, RiStore2Line } from '@remixicon/react';
 import { useNavigate } from 'react-router-dom';
 import RemoveFromWishlist from '../../Components/WishlistPageComponents/RemoveFromWishlist';
+import TruckLoader from '../../Components/TruckLoader';
 
 const getWishlist = async (id) => {
     try {
@@ -76,7 +77,11 @@ export default function WishlistPage({user, setUser}) {
                             <h1 className="text-center">Your Wishlist is EMPTY!!!</h1>
                         </div>
                         </div>}
-                    {!wishlist && <h1 className="mt-5 text-center">Loading...</h1>}
+                    {!wishlist &&
+                        <div className="h-1/3 w-full flex items-center justify-center mt-10">
+                            <TruckLoader />
+                        </div>
+                    }
                     {wishlist && wishlist.length > 0 &&
                         <div className="w-full h-[73vh] overflow-scroll flex flex-col gap-5 mt-5 px-5 pb-5">
                             {wishlist.map((product) => (

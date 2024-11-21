@@ -1,6 +1,7 @@
 import { RiHeartFill, RiHeartLine } from '@remixicon/react';
 import React, {useState} from 'react';
 import {useCookies} from 'react-cookie';
+import '../HeartButtonProducts.css';
 
 const add = async (token, id) => {
     try {
@@ -86,7 +87,9 @@ export default function AddToWishList({user, setUser}) {
 
     return (
         <div className="absolute h-10 w-full px-5 py-3">
-            {isPresentInWishlist() ? (
+            {
+            !isUpdating ? (
+            isPresentInWishlist() ? (
                 <button
                 onClick={removeProductFromWishlist}
                 disabled={isUpdating}
@@ -101,6 +104,10 @@ export default function AddToWishList({user, setUser}) {
                 className="h-10 w-10 float-right rounded-full border border-zinc-400 text-zinc-400 flex items-center justify-center bg-white cursor-pointer"
                 ><RiHeartLine />
                 </button>
+            )):(
+                <div className="h-10 w-10 float-right rounded-full border border-zinc-200 text-red-500 flex items-center justify-center bg-white cursor-pointer">
+                    <div className="loaderCircle"></div>
+                </div>
             )}
         </div>
     );

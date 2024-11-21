@@ -1,14 +1,11 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {useCookies} from 'react-cookie';
 import AddToWishListSmall from './AddToWishlistSmall';
 import { RiArrowDownLine } from '@remixicon/react';
 
 export default function ProductSmall({product, user, setUser}) {
     const navigate = useNavigate();
-    const [, setCookie] = useCookies(['prodtoken']);
     const handleClick = () => {
-        setCookie('prodtoken', product._id, {path:'/shop'})
         navigate(`/shop/${product?.name.toLowerCase().replace(/ /g, "_")}`);
     }
     return (
@@ -36,7 +33,7 @@ export default function ProductSmall({product, user, setUser}) {
                     </div>
                 </div>
             </div>
-            <div className="h-full flex mt-1 px-3 gap-3">
+            <div className="h-full flex mt-1 px-5 gap-3">
                 <AddToWishListSmall user={user} setUser={setUser} product={product} />
             </div>
         </div>

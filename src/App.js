@@ -6,6 +6,7 @@ import Profile from './Pages/Profile/Profile';
 import ShopApp from './Pages/Shop/ShopApp';
 import WishlistPage from './Pages/Profile/WishlistPage';
 import PageNotFound from './Pages/404PageNotFound/PageNotFound';
+import SignPage from './Pages/SignPage/SignPage';
 
 const getUser = async (id) => {
     try {
@@ -52,7 +53,11 @@ export default function App() {
             <Routes>
                 <Route
                     path="/"
-                    element={ <Home setUser={setUser} setMessage={setMessage}/> }
+                    element={ <Home /> }
+                />
+                <Route
+                    path="/sign"
+                    element={ <SignPage setUser={setUser} setMessage={setMessage}/> }
                 />
                 <Route
                     exact
