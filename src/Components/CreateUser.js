@@ -59,12 +59,24 @@ export default function CreateUser({setMessages, messages, setLoad}) {
 
     const handleImage = (e) => {
         const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const img = reader.result.toString('base64');
-            setImage(img);
+        try {
+            if(file instanceof Blob) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const img = reader.result;
+                    setImage(img);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const img = reader.result.toString('base64');
+                    setImage(img);
+                }
+            }
+        } catch(err) {
+            console.error("readAsFileURL error is being generated again and again" + err);
         }
-        reader.readAsDataURL(file);
     }
 
     return (
@@ -73,7 +85,36 @@ export default function CreateUser({setMessages, messages, setLoad}) {
                 <h1 className="hidden md:block text-2xl font-bold">welcome to <span className="text-blue-400">Bitem</span></h1>
                 <h1 className="text-xl font-medium">Create your account</h1>
             </div>
-            <form ref={formRef} onSubmit={handleSubmit} className="w-full flex flex-col items-center justify-center gap-2">
+            <form ref={formRef} onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-2">
+                <div className="w-full h-32 ml-10">
+                    {image === "" ? (
+                        <div className="relative h-32 w-32 rounded-[10px] border border-dashed border-zinc-400 bg-zinc-100 overflow-hidden cursor-pointer">
+                            <div className="absolute h-32 w-32 flex flex-col items-center justify-center text-xs p-1">
+                                <h1 className="text-center">Drag and Drop an image here</h1>
+                                <h1 className="text-center">or</h1>
+                                <h1 className="text-center">Click to select your profile image</h1>
+                            </div>
+                            <input
+                                type="file"
+                                name="image"
+                                onChange={handleImage}
+                                className="absolute opacity-0 h-32 w-32 display-none rounded-lg outline-none bg-transparent cursor-pointer"
+                            />
+                        </div>
+                        ) : (
+                        <div className="relative h-32 w-32 rounded-[10px] overflow-hidden cursor-pointer">
+                            <div className="absolute h-32 w-32 rounded-[10px] bg-zinc-100 overflow-hidden">
+                                <img className="w-full h-full object-cover" src={image} alt={name} />
+                            </div>
+                            <input
+                                type="file"
+                                name="image"
+                                onChange={handleImage}
+                                className="absolute opacity-0 h-32 w-32 display-none rounded-lg outline-none bg-transparent cursor-pointer"
+                            />
+                        </div>
+                    )}
+                </div>
                 <input
                     type="text"
                     name="name"
@@ -81,12 +122,6 @@ export default function CreateUser({setMessages, messages, setLoad}) {
                     autoComplete="off"
                     onChange={(e) => setName(e.target.value)}
                     className="w-full border border-zinc-700 rounded-full py-2 px-5 outline-none bg-transparent"
-                />
-                <input
-                    type="file"
-                    name="name"
-                    onChange={handleImage}
-                    className="w-full rounded-full file:rounded-full file:bg-amber-300 file:mr-5 file:border-0 file:py-2 file:px-5 outline-none bg-transparent cursor-ppinter file:cursor-pointer"
                 />
                 <input
                     type="email"

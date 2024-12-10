@@ -12,8 +12,8 @@ import TruckLoader from '../../Components/TruckLoader';
 
 const getProducts = async () => {
     try {
-        const response = await fetch('https://server.bitem.in/products/all');
         // const response = await fetch('http://localhost:8000/products/all');
+        const response = await fetch('https://server.bitem.in/products/all');
         if(response.ok) {
             const data = await response.json();
             return data;
@@ -52,13 +52,17 @@ export default function ShopApp({user, setUser}) {
         navigate(`/${user?.name.replace(/ /g, '_')}`);
     }
 
+    const navigateToShop = () => {
+        navigate('/shop');
+    }
+
     const navigateToWishlistPage = (e) => {
         e.preventDefault();
         navigate(`/${user?.name.replace(/ /g, '_')}/wishlist`);
     }
 
-    const navigateToShop = () => {
-        navigate('/shop');
+    const navigateToCartPage = () => {
+        navigate(`/${user?.name.replace(/ /g, '_')}/cart`);
     }
 
     return (
@@ -66,14 +70,14 @@ export default function ShopApp({user, setUser}) {
             <div className="fixed h-[8vh] md:[10vh] w-full flex items-center justify-between px-5 md:px-10 border-b border-zinc-200 bg-white md:border-0 z-10">
                 <Head />
                 <div className="flex items-center gap-5">
-                    <div className="">
+                    {!isShopRoute && <button onClick={navigateToShop} className="cursor-pointer"><RiStore2Line size={22} /></button>}
+                    <button onClick={navigateToWishlistPage} className="cursor-pointer text-red-500"><RiHeartFill size={25} /></button>
+                    <button onClick={navigateToCartPage} className="cursor-pointer"><RiShoppingCart2Line size={25} /></button>
+                    <div className="flex items-center">
                         <button onClick={checkRoute} className="h-8 w-8 rounded-full overflow-hidden bg-zinc-200">
                             {user && <img className="" src={user.image} alt={user.name}/>}
                         </button>
                     </div>
-                    <button onClick={navigateToWishlistPage} className="cursor-pointer text-red-500"><RiHeartFill size={30} /></button>
-                    {!isShopRoute && <button onClick={navigateToShop} className="cursor-pointer"><RiStore2Line size={25} /></button>}
-                    <button className="cursor-pointer"><RiShoppingCart2Line size={27} /></button>
                     <LogoutUser setUser={setUser} />
                 </div>
             </div>

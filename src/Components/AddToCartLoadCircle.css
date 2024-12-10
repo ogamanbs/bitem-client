@@ -1,0 +1,32 @@
+.loaderCircleCart{
+    border: 3px solid #fff;
+    border-left-color: transparent;
+    border-radius: 50%;
+}
+
+.loaderCircleCart {
+    border: 3px solid #fff;
+    border-left-color: transparent;
+    width: 24px;
+    height: 24px;
+}
+
+.loaderCircleCart {
+    border: 3px solid #fff;
+    border-left-color: transparent;
+    width: 24px;
+    height: 24px;
+    animation: spin89345 1s linear infinite;
+}
+
+@keyframes spin89345 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* <div className="loaderCircle"></div> */

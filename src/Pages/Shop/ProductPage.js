@@ -4,11 +4,12 @@ import {useNavigate} from 'react-router-dom';
 import SmallImages from '../../Components/ProductPageComponents/SmallImages';
 import AddToWishList from '../../Components/ProductPageComponents/AddToWishList';
 import TruckLoader from '../../Components/TruckLoader';
+import AddToCart from '../../Components/AddToCart';
 
 const getProduct = async (id) => {
     try{
-        const response = await fetch('https://server.bitem.in/products/specific', {
         // const response = await fetch('http://localhost:8000/products/specific', {
+        const response = await fetch('https://server.bitem.in/products/specific', {
             method: "POST",
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ id })
@@ -90,7 +91,7 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
                             <h1 className="text-center text-sm">hover over small images to view them</h1>
                         </div>
                         <div className="hidden md:flex h-20 w-full mt-5 items-center justify-around gap-5 px-10">
-                            <button className="px-7 py-3 rounded-lg bg-orange-500 text-white font-bold w-full">Add to Cart</button>
+                            <AddToCart product={product} user={user} setUser={setUser} />
                             <button className="px-7 py-3 rounded-lg bg-yellow-500 text-white font-bold w-full">Buy Now</button>
                         </div>
                     </div>
@@ -98,11 +99,15 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
                         <h6 className="text-xs text-blue-500 cursor-default"><span className="cursor-pointer"><button onClick={goToShop} className="">Shop</button></span> &gt; {product.name}</h6>
                         <h1 className="text-2xl font-medium mt-1">{product?.name}</h1>
                         <div className="mt-5">
-                            <div className="flex gap-3 md:gap-5 items-end">
+                            {product?.discount > 0 ? ( <div className="flex gap-3 md:gap-5 items-end">
                                 <h1 className="font-bold text-3xl md:text-4xl">₹ {product?.price * (1 - (product?.discount / 100))}</h1>
                                 <h3 className="line-through text-xl text-zinc-700 font-bold">₹ {product?.price}</h3>
                                 <div className="text-[0.5 rem] text-white font-bold bg-green-600 py-1 px-2 rounded-lg">{product?.discount}% off</div>
-                            </div>
+                            </div> ) : (
+                                <div className="flex gap-3 md:gap-5 items-end">
+                                    <h1 className="font-bold text-3xl md:text-4xl">₹ {product?.price}</h1>
+                                </div>
+                            )}
                         </div>
                         {
                         product?.description &&

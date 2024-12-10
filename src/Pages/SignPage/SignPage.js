@@ -35,7 +35,7 @@ export default function SignPage({setUser, setMessage}) {
 
     return (
         <div className="relative w-full h-full">
-            <div className={`absolute ${vis} w-full min-h-screen bg-zinc-200/20 backdrop-blur-md`}>
+            <div className={`absolute ${vis} w-full min-h-screen bg-zinc-200/20 backdrop-blur-md z-10`}>
                 <PreLoader load={load} setLoad={setLoad} />
             </div>
             <div className="h-full w-full flex items-center gap-2 p-5 select-none">

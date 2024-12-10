@@ -15,11 +15,11 @@ export default function Product({product, user, setUser}) {
             <div onClick={handleClick} className="h-3/4 py-3 border-b border-zinc-200">
                 <img className="w-full h-full object-contain" src={product.images[0]} alt={product.name} />
             </div>
-            <div className='h-1/4 px-3 flex items-center'>
+            <div onClick={handleClick} className='h-1/4 px-3 flex items-center'>
                 <div className="flex justify-between gap-3 font-medium w-full">
-                    <div onClick={handleClick} className="w-auto">
+                    <div className="w-auto">
                         <h1 className="">{product.name}</h1>
-                        <h3 className="text-xs font-light truncate">seller: {product.owner.name}</h3>
+                        <h3 className="text-xs font-light truncate">seller: <span className="capitalize">{product.owner.name}</span></h3>
                         <div className="flex items-center gap-4 mt-1">
                             <h2 className="text-lime-700 select-none">₹ {product.price - (product.price * product.discount / 100)}</h2>
                             <h2 className="line-through select-none">₹ {product.price}</h2>

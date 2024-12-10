@@ -17,6 +17,14 @@ export default function Profile({user, setUser}) {
         navigate('/shop');
     }
 
+    const navigateToWishlistPage = (e) => {
+        e.preventDefault();
+        navigate(`/${user?.name.replace(/ /g, '_')}/wishlist`);
+    }
+
+    const navigateToCartPage = () => {
+        navigate(`/${user?.name.replace(/ /g, '_')}/cart`);
+    }
 
     return (
         <>
@@ -24,9 +32,9 @@ export default function Profile({user, setUser}) {
                 <div className="h-[8vh] md:[10vh] w-full flex items-center justify-between px-5 md:px-10 border-b border-zinc-200 bg-white">
                     <a href="/shop"><Head /></a>
                     <div className="flex items-center gap-5">
-                        <button className="cursor-pointer text-red-500"><RiHeartFill size={30}/></button>
-                        <button onClick={navigateToShop} className="cursor-pointer"><RiStore2Line size={25} /></button>
-                        <button className="cursor-pointer"><RiShoppingCart2Line size={27}/></button>
+                        <button onClick={navigateToShop} className="cursor-pointer"><RiStore2Line size={22} /></button>
+                        <button onClick={navigateToWishlistPage} className="cursor-pointer text-red-500"><RiHeartFill size={25}/></button>
+                        <button onClick={navigateToCartPage} className="cursor-pointer"><RiShoppingCart2Line size={25}/></button>
                         <LogoutUser setUser={setUser} />
                     </div>
                 </div>

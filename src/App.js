@@ -7,6 +7,7 @@ import ShopApp from './Pages/Shop/ShopApp';
 import WishlistPage from './Pages/Profile/WishlistPage';
 import PageNotFound from './Pages/404PageNotFound/PageNotFound';
 import SignPage from './Pages/SignPage/SignPage';
+import CartPage from './Pages/Profile/CartPage';
 
 const getUser = async (id) => {
     try {
@@ -73,6 +74,11 @@ export default function App() {
                     exact
                     path={`/${JSON.parse(localStorage.getItem('user'))?.name.replace(/ /g, '_')}/wishlist`}
                     element={ cookies.token !== undefined ? <WishlistPage user={user} setUser={setUser} /> : <Navigate to="/" replace /> }
+                />
+                <Route
+                    exact
+                    path={`/${JSON.parse(localStorage.getItem('user'))?.name.replace(/ /g, '_')}/cart`}
+                    element={ cookies.token !== undefined ? <CartPage user={user} setUser={setUser} /> : <Navigate to="/" replace /> }
                 />
                 <Route
                     exact

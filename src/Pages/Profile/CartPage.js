@@ -2,15 +2,15 @@ import React,{useEffect, useState} from 'react';
 import {useCookies} from 'react-cookie';
 import Head from '../../Components/Head';
 import LogoutUser from '../../Components/LogoutUser';
-import { RiArrowLeftLine, RiShoppingCart2Line, RiStore2Line } from '@remixicon/react';
+import { RiArrowLeftLine, RiHeartFill, RiStore2Line } from '@remixicon/react';
 import { useNavigate } from 'react-router-dom';
-import RemoveFromWishlist from '../../Components/WishlistPageComponents/RemoveFromWishlist';
 import TruckLoader from '../../Components/TruckLoader';
+import RemoveFromCartItems from '../../Components/CartPageComponents/RemoveFromCartItems';
 
-const getWishlist = async (id) => {
+const getCartItems= async (id) => {
     try {
-        // const response = await fetch('http://localhost:8000/user/wishlist', {
-        const response = await fetch('https://server.bitem.in/user/wishlist', {
+        // const response = await fetch('http://localhost:8000/user/cart-items', {
+        const response = await fetch('https://server.bitem.in/user/cart-items', {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ id })
@@ -27,9 +27,9 @@ const getWishlist = async (id) => {
     }
 }
 
-export default function WishlistPage({user, setUser}) {
+export default function CartPage({user, setUser}) {
     const [cookies] = useCookies(['token']);
-    const [wishlist, setWishlist] = useState(null);
+    const [cartItems, setCartItems] = useState(null);
     const [isUpdating, setIsUpdating] = useState(false);
     const [productBeingUpdated, setProductBeingUpdated] = useState([]);
 
@@ -37,10 +37,9 @@ export default function WishlistPage({user, setUser}) {
 
     useEffect(() => {
         const callAPI = async () => {
-            const data = await getWishlist(cookies.token);
-            console.log(data.wishlist);
-            if(data.wishlist) {
-                setWishlist(data.wishlist);
+            const data = await getCartItems(cookies.token);
+            if(data.cartItems) {
+                setCartItems(data.cartItems);
             }
         }
         callAPI();
@@ -54,8 +53,9 @@ export default function WishlistPage({user, setUser}) {
         navigate('/shop');
     }
 
-    const navigateToCartPage = () => {
-        navigate(`/${user?.name.replace(/ /g, '_')}/cart`);
+    const navigateToWishlistPage = (e) => {
+        e.preventDefault();
+        navigate(`/${user?.name.replace(/ /g, '_')}/wishlist`);
     }
 
     const navigateBack = () => {
@@ -68,7 +68,7 @@ export default function WishlistPage({user, setUser}) {
                 <Head />
                 <div className="flex items-center gap-5">
                     <button onClick={navigateToShop} className="cursor-pointer"><RiStore2Line size={22} /></button>
-                    <button onClick={navigateToCartPage} className="cursor-pointer"><RiShoppingCart2Line size={25} /></button>
+                    <button onClick={navigateToWishlistPage} className="cursor-pointer text-red-500"><RiHeartFill size={25} /></button>
                     <div className="flex items-center">
                         <button onClick={checkRoute} className="h-8 w-8 rounded-full overflow-hidden bg-zinc-200">
                             {user && <img className="" src={user.image} alt={user.name}/>}
@@ -80,25 +80,25 @@ export default function WishlistPage({user, setUser}) {
             <div className="h-[8vh] bg-transparent w-full"></div>
             <div className="h-[82vh] w-full flex justify-center">
                 <div className='h-[82vh] w-full md:w-1/2'>
-                    <div className="flex items-center text-zinc-600 px-5 pt-5 gap-5">
+                <div className="flex items-center text-zinc-600 px-5 pt-5 gap-5">
                         <button onClick={navigateBack} className="text-blue-500"><RiArrowLeftLine/></button>
-                        <h1 className="text-3xl font-bold ">Wishlist</h1>
+                        <h1 className="text-3xl font-bold ">Cart</h1>
                     </div>
-                    {wishlist !== null && wishlist.length === 0 &&  <div className="h-auto w-full flex flex-col gap-5 mt-5 px-5">
+                    {cartItems !== null && cartItems.length === 0 &&  <div className="h-auto w-full flex flex-col gap-5 mt-5 px-5">
                         <div className=" border border-zinc-200 p-5 rounded-lg">
-                            <h1 className="text-center">Your Wishlist is EMPTY!!!</h1>
+                            <h1 className="text-center">Your Cart is EMPTY!!!</h1>
                         </div>
                         </div>}
-                    {!wishlist &&
+                    {!cartItems &&
                         <div className="h-1/3 w-full flex items-center justify-center mt-10">
                             <TruckLoader />
                         </div>
                     }
-                    {wishlist && wishlist.length > 0 &&
+                    {cartItems && cartItems.length > 0 &&
                         <div className="w-full h-[73vh] overflow-scroll flex flex-col gap-5 mt-5 px-5 pb-5">
-                            {wishlist.map((product) => (
+                            {cartItems.map((product) => (
                                 <div key={product.item._id} className="relative h-auto w-full border border-zinc-200 p-5 rounded-lg">
-                                    <div className="flex flex-col md:flex-row gap-10">
+                                    <div  className="flex flex-col md:flex-row gap-10">
                                         <div className="h-[30vh] md:h-20 w-full md:w-auto flex justify-center">
                                             <div className=" w-[30vh] md:min-w-20 md:max-w-20 h-full rounded-lg cursor-pointer overflow-hidden">
                                                 <img className={`w-full h-full object-contain ${isUpdating && productBeingUpdated.includes(product.item._id) ? 'grayscale' : 'grayscale-0'} `} src={product.item.images[0]} alt={product.item.name} />
@@ -106,7 +106,7 @@ export default function WishlistPage({user, setUser}) {
                                         </div>
                                         <div className="w-full flex flex-col">
                                             <h1 className="hover:text-blue-500 text-base cursor-pointer text-black">{product.item.name}</h1>
-                                            <h1 className='text-xs text-zinc-500'>Added to wishlist on {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(product.dateAdded).getDay()] + ' ' + new Date(product.dateAdded).getDate() + '-' + (new Date(product.dateAdded).getMonth() + 1) + '-' + new Date(product.dateAdded).getFullYear()}</h1>
+                                            <h1 className='text-xs text-zinc-500'>Added to Cart on {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(product.dateAdded).getDay()] + ' ' + new Date(product.dateAdded).getDate() + '-' + (new Date(product.dateAdded).getMonth() + 1) + '-' + new Date(product.dateAdded).getFullYear()}</h1>
                                             <div className="flex gap-3 items-start mt-3">
                                                 <h1 className="text-2xl font-bold">₹ {product.item.price * ((100 - product.item.discount) / 100)}</h1>
                                                 <h1 className="line-through text-zinc-600 text-sm mt-1">₹ {product.item.price}</h1>
@@ -114,10 +114,10 @@ export default function WishlistPage({user, setUser}) {
                                             </div>
                                         </div>
                                         <div className="hidden md:block text-zinc-400">
-                                            {!productBeingUpdated.includes(product.item._id)  && <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />}
+                                            {!productBeingUpdated.includes(product.item._id)  && <RemoveFromCartItems user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />}
                                         </div>
                                         {!productBeingUpdated.includes(product.item._id)  && <div className="absolute right-0 md:hidden text-zinc-400 flex items-center justify-center p-4 -translate-y-5 rounded-lg border border-zinc-200">
-                                            <RemoveFromWishlist user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />
+                                            <RemoveFromCartItems user={user} id={product.item._id} setUser={setUser} isUpdating={isUpdating} setIsUpdating={setIsUpdating} productBeingUpdated={productBeingUpdated} setProductBeingUpdated={setProductBeingUpdated} />
                                         </div>}
                                     </div>
                                 </div>
