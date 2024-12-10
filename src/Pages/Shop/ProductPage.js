@@ -136,7 +136,7 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
                 </div>
             </div>
             <div className="h-[10vh] w-full fixed flex items-center gap-5 md:hidden justify-around px-5">
-                <button className="px-7 py-3 rounded-lg bg-orange-500 text-white font-bold w-full">Add to Cart</button>
+                <AddToCart product={product} user={user} setUser={setUser} />
                 <button className="px-7 py-3 rounded-lg bg-yellow-500 text-white font-bold w-full">Buy Now</button>
             </div>
         </div>
