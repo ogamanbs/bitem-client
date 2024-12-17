@@ -4,10 +4,12 @@ import Products from '../../Components/Products';
 import MenuSmall from '../../Components/MenuSmall';
 import { RiSearchLine} from '@remixicon/react';
 import {useCookies} from 'react-cookie';
+import FeatureSoonModal from '../../Components/FeatureSoonModal';
 
 export default function Shop({user, setUser, products, setProducts, setIsShopRoute, isShopRoute}) {
     const [search, setSearch] = useState("");
     const [cookies,,removeCookie] = useCookies(['prodtoken']);
+    const [showFeatureSoonModal, setShowFeatureSoonModal] = useState(false);
 
     useEffect(() => {
         if(cookies.prodtoken) {
@@ -19,13 +21,22 @@ export default function Shop({user, setUser, products, setProducts, setIsShopRou
         }
     }, [cookies, removeCookie, isShopRoute, setIsShopRoute]);
 
+    const handleFilterClick = () => {
+        setShowFeatureSoonModal(true);
+    }
+
+    const handleCloseFeatureModal = () => {
+        setShowFeatureSoonModal(false);
+    }
+
     return (
-        <div className="h-[82vh] md:h-[92vh] flex flex-col md:flex-row w-full">
+        <div className="relative h-[82vh] md:h-[92vh] flex flex-col md:flex-row w-full">
+            {showFeatureSoonModal && <FeatureSoonModal handleCloseFeatureModal={handleCloseFeatureModal}/>}
             <div className="hidden md:block">
-                <Menu />
+                <Menu handleFilterClick={handleFilterClick}/>
             </div>
             <div className="block  md:hidden">
-                <MenuSmall search={search} setSearch={setSearch} />
+                <MenuSmall search={search} setSearch={setSearch} handleFilterClick={handleFilterClick}/>
             </div>
             <div className="h-full w-full md:w-[calc(80vw)]">
                 <div className="hidden h-[7vh] w-full md:flex items-center z-[10] mb-5 bg-white">

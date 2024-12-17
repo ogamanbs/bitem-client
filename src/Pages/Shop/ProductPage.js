@@ -5,6 +5,8 @@ import SmallImages from '../../Components/ProductPageComponents/SmallImages';
 import AddToWishList from '../../Components/ProductPageComponents/AddToWishList';
 import TruckLoader from '../../Components/TruckLoader';
 import AddToCart from '../../Components/AddToCart';
+import BuyNowButton from '../../Components/ProductPageComponents/BuyNowButton';
+import BuyAlertModal from '../../Components/ProductPageComponents/BuyAlertModal';
 
 const getProduct = async (id) => {
     try{
@@ -33,6 +35,7 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
     const [cookies, ,removeCookie] = useCookies(['prodtoken']);
     const [product, setProduct] = useState(null);
     const [imgnum, setImgnum] = useState(0);
+    const [showBuyAlert, setShowBuyAlert] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -71,8 +74,16 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
         navigate('/shop');
     }
 
+    const handleBuyButtonClick = () => {
+        setShowBuyAlert(true);
+    }
+
+    const handleCloseButton = () => {
+        setShowBuyAlert(false);
+    }
     return (
         <div className="relative h-[83vh] md:h-[92vh] w-full">
+            {showBuyAlert && <BuyAlertModal handleCloseButton={handleCloseButton}/>}
             <div className="h-[73vh] md:h-full w-full">
                 <div className="h-full w-full flex md:flex-row flex-col overflow-scroll md:overflow-hidden">
                     <div className="md:h-[40vh] w-full md:w-[40%]">
@@ -92,7 +103,7 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
                         </div>
                         <div className="hidden md:flex h-20 w-full mt-5 items-center justify-around gap-5 px-10">
                             <AddToCart product={product} user={user} setUser={setUser} />
-                            <button className="px-7 py-3 rounded-lg bg-yellow-500 text-white font-bold w-full">Buy Now</button>
+                            <BuyNowButton handleBuyButtonClick={handleBuyButtonClick} setShowBuyAlert={setShowBuyAlert} />
                         </div>
                     </div>
                     <div className="md:min-h-[90vh] w-full md:border-l border-zinc-500 md:w-[60%] mt-5 md:mt-0 md:px-10 px-5 md:overflow-scroll">
@@ -137,7 +148,7 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
             </div>
             <div className="h-[10vh] w-full fixed flex items-center gap-5 md:hidden justify-around px-5">
                 <AddToCart product={product} user={user} setUser={setUser} />
-                <button className="px-7 py-3 rounded-lg bg-yellow-500 text-white font-bold w-full">Buy Now</button>
+                <BuyNowButton handleBuyButtonClick={handleBuyButtonClick} setShowBuyAlert={setShowBuyAlert}/>
             </div>
         </div>
     )

@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function SecondSection() {
+export default function SecondSection({handleFilterClick}) {
   return (
     <div className="flex flex-col gap-2 w-full">
-      <h1 className="cursor-pointer">New Collection</h1>
-      <h1 className="cursor-pointer">Discounted Products</h1>
+      <button onClick={handleFilterClick} className="text-left">New Collection</button>
+      <button onClick={handleFilterClick} className="text-left">Discounted Products</button>
     </div>
   )
 }
