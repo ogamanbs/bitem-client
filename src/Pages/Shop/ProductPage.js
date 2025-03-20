@@ -111,7 +111,7 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
                         <h1 className="text-2xl font-medium mt-1">{product?.name}</h1>
                         <div className="mt-5">
                             {product?.discount > 0 ? ( <div className="flex gap-3 md:gap-5 items-end">
-                                <h1 className="font-bold text-3xl md:text-4xl">₹ {product?.price * (1 - (product?.discount / 100))}</h1>
+                                <h1 className="font-bold text-3xl md:text-4xl">₹ {Math.round(product?.price * (1 - (product?.discount / 100)))}</h1>
                                 <h3 className="line-through text-xl text-zinc-700 font-bold">₹ {product?.price}</h3>
                                 <div className="text-[0.5 rem] text-white font-bold bg-green-600 py-1 px-2 rounded-lg">{product?.discount}% off</div>
                             </div> ) : (
@@ -135,8 +135,8 @@ export default function ProductPage({user, setUser, isShopRoute, setIsShopRoute}
                                         {
                                             product.features.map((feature) => (
                                                 <div className="flex gap-5 items-start text-[1rem]">
-                                                    <h1 className="md:w-[30%] w-[40%] bg-red-500 font-medium py-2">{feature.name}</h1>
-                                                    <p className="md:w-[70%] w-[60%] bg-red-500 py-2">{feature.description}</p>
+                                                    <h1 className="md:w-[30%] w-[40%] font-medium py-2">{feature.name}</h1>
+                                                    <p className="md:w-[70%] w-[60%] py-2">{feature.description}</p>
                                                 </div>
                                             ))
                                         }

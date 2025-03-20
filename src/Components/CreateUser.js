@@ -2,8 +2,8 @@ import { RiEye2Line, RiEyeCloseLine } from '@remixicon/react';
 import React,{useState, useRef} from 'react';
 
 const signUser = async (user) => {
-    const response = await fetch('https://server.bitem.in/user/create', {
-    // const response = await fetch('http://localhost:8000/user/create', {
+    // const response = await fetch('https://server.bitem.in/user/create', {
+    const response = await fetch('http://localhost:8000/user/create', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
@@ -40,12 +40,14 @@ export default function CreateUser({setMessages, messages, setLoad}) {
                 email: email,
                 password: password,
             }
+            console.log(user);
             const data = await signUser(user);
             formRef.current.reset();
             setLoad(100);
             setMessages([...messages, data.message]);
             setName("");
             setEmail("");
+            setImage("");
             setPassword("");
         } else {
             setMessages([...messages, "empty fields not allowed"]);
