@@ -2,8 +2,8 @@ import { RiEye2Line, RiEyeCloseLine } from '@remixicon/react';
 import React,{useState, useRef} from 'react';
 
 const signUser = async (user) => {
-    // const response = await fetch('https://server.bitem.in/user/create', {
-    const response = await fetch('http://localhost:8000/user/create', {
+    const response = await fetch('https://server.bitem.in/user/create', {
+    // const response = await fetch('http://localhost:8000/user/create', {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
@@ -122,7 +122,7 @@ export default function CreateUser({setMessages, messages, setLoad}) {
                     name="name"
                     placeholder="name"
                     autoComplete="off"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value.trim())}
                     className="w-full border border-zinc-700 rounded-full py-2 px-5 outline-none bg-transparent"
                 />
                 <input
